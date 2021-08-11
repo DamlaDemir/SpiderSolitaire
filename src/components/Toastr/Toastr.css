@@ -1,0 +1,211 @@
+#noty_layout__bottomRight {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  z-index: 9999999;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  transform: translateZ(0) scale(1, 1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  filter: blur(0);
+  -webkit-filter: blur(0);
+  max-width: 22vw;
+  font-size: 2vh;
+}
+
+#noty_layout__bottomRight {
+  bottom: 2vh;
+  right: 2vh;
+  width: 20vw;
+}
+
+.noty_progressbar {
+  display: none;
+}
+
+.noty_has_timeout.noty_has_progressbar .noty_progressbar {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #646464;
+  opacity: 0.2;
+  filter: alpha(opacity=10);
+}
+
+.noty_bar {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate(0, 0) translateZ(0) scale(1, 1);
+  -ms-transform: translate(0, 0) scale(1, 1);
+  transform: translate(0, 0) scale(1, 1);
+  -webkit-font-smoothing: subpixel-antialiased;
+  overflow: hidden;
+}
+
+.noty_effects_open {
+  opacity: 0;
+  -webkit-transform: translate(50%);
+  -ms-transform: translate(50%);
+  transform: translate(50%);
+  -webkit-animation: noty_anim_in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: noty_anim_in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.noty_effects_close {
+  -webkit-animation: noty_anim_out 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: noty_anim_out 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.noty_fix_effects_height {
+  -webkit-animation: noty_anim_height 75ms ease-out;
+  animation: noty_anim_height 75ms ease-out;
+}
+
+@-webkit-keyframes noty_modal_in {
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes noty_modal_in {
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@-webkit-keyframes noty_modal_out {
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes noty_modal_out {
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes noty_modal_out {
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes noty_anim_in {
+  100% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes noty_anim_in {
+  100% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes noty_anim_out {
+  100% {
+    -webkit-transform: translate(50%);
+    transform: translate(50%);
+    opacity: 0;
+  }
+}
+
+@keyframes noty_anim_out {
+  100% {
+    -webkit-transform: translate(50%);
+    transform: translate(50%);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes noty_anim_height {
+  100% {
+    height: 0;
+  }
+}
+
+@keyframes noty_anim_height {
+  100% {
+    height: 0;
+  }
+}
+
+/*# sourceMappingURL=noty.css.map*/
+
+.noty_theme__bootstrap-v4.noty_bar {
+  margin: 4px 0;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 0.1vw;
+}
+
+.noty_body {
+  padding: 1vh 2vh;
+}
+
+.noty_buttons {
+  padding: 10px;
+}
+
+.noty_close_button {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: 0.5;
+  background: transparent;
+}
+
+.noty_close_button:hover {
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  filter: alpha(opacity=50);
+  opacity: 0.75;
+}
+
+.noty_theme__bootstrap-v4.noty_type__alert,
+.noty_theme__bootstrap-v4.noty_type__notification {
+  background-color: #fff;
+  color: inherit;
+}
+
+.noty_theme__bootstrap-v4.noty_type__warning {
+  background-color: #f9e79f;
+  color: rgb(77, 68, 30);
+  border-color: rgb(227, 209, 134);
+}
+
+.noty_theme__bootstrap-v4.noty_type__error {
+  background-color: #ec7063;
+  color: rgb(84, 28, 28);
+  border-color: rgb(210, 85, 72);
+}
+
+.noty_theme__bootstrap-v4.noty_type__info,
+.noty_theme__bootstrap-v4.noty_type__information {
+  background-color: #85c1e9;
+  color: rgb(24, 58, 80);
+  border-color: rgb(28, 114, 180);
+}
+
+.noty_theme__bootstrap-v4.noty_type__success {
+  background-color: #76d7c4;
+  color: rgb(9, 67, 55);
+  border-color: rgb(103, 198, 179);
+}
