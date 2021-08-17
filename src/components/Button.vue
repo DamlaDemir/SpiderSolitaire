@@ -13,6 +13,7 @@ export default {
   props: {
     icon: {
       type: String,
+      require: true,
     },
     text: {
       type: String,

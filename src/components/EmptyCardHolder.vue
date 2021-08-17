@@ -1,7 +1,7 @@
 <template>
   <div class="card-holder">
     <img
-      src="../../src/assets/images/icons/ban.svg"
+      src="@/assets/images/icons/ban.svg"
       width="100"
       height="100"
       class="ban"

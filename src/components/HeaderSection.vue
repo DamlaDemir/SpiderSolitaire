@@ -1,7 +1,7 @@
 <template>
   <div class="header-section">
     <div class="header-item-section">
-      <Button icon="restart" text="RESTART" @onClick="restartGame" />
+      <Button icon="restart" text="RESTART" @onClick="$emit('restartGame')" />
       <Button icon="hint" text="HINT" @onClick="$emit('getHints')" />
     </div>
 
@@ -14,10 +14,9 @@
 </template>
 
 <script>
-import Button from "./Button.vue";
-
-import Timer from "./Timer.vue";
-import Score from "./Score.vue";
+import Button from "@/components/Button.vue";
+import Timer from "@/components/Timer.vue";
+import Score from "@/components/Score.vue";
 
 export default {
   name: "Header",
@@ -31,11 +30,6 @@ export default {
     Timer,
     Score,
     Button,
-  },
-  methods: {
-    restartGame() {
-      window.location.reload();
-    },
   },
 };
 </script>

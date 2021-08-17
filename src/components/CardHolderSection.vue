@@ -6,14 +6,14 @@
     >
       <empty-card-holder v-if="cardHolder.empty" />
       <div class="full-card-holder" v-else>
-        <img src="../../src/assets/images/cards/card-1.svg" />
+        <img src="@/assets/images/cards/card-1.svg" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import EmptyCardHolder from "./EmptyCardHolder.vue";
+import EmptyCardHolder from "@/components/EmptyCardHolder.vue";
 
 export default {
   name: "CardHolderSection",
@@ -42,7 +42,6 @@ export default {
       cardHolders: [],
     };
   },
-  computed: {},
   methods: {
     createCardHolders() {
       let cardHolders = [];
@@ -63,7 +62,6 @@ export default {
   created() {
     this.createCardHolders();
   },
-  mounted() {},
 };
 </script>
 

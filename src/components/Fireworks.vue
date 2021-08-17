@@ -1,18 +1,62 @@
 <template>
-  <div class="pyro">
-    <div class="before"></div>
-    <div class="after"></div>
-  </div>
+  <div class="fireworks-example"><slot /></div>
 </template>
 
 <script>
+import { Fireworks } from "fireworks-js";
+
 export default {
-  name: "Fireworks"
+  name: "Fireworks",
+  methods: {
+    startFireworks() {
+      const container = document.querySelector(".fireworks-example");
+      const fireworks = new Fireworks(container, {
+        rocketsPoint: 10,
+        hue: { min: 0, max: 360 },
+        delay: { min: 15, max: 30 },
+        speed: 2,
+        acceleration: 1.05,
+        friction: 0.95,
+        gravity: 1.5,
+        particles: 50,
+        trace: 3,
+        explosion: 5,
+        autoresize: true,
+        brightness: {
+          min: 50,
+          max: 80,
+          decay: { min: 0.015, max: 0.03 },
+        },
+        mouse: {
+          click: false,
+          move: false,
+          max: 3,
+        },
+        boundaries: {
+          x: 50,
+          y: 50,
+          width: container.clientWidth,
+          height: container.clientHeight,
+        },
+        sound: {
+          enable: true,
+          files: ["explosion0.mp3", "explosion1.mp3", "explosion2.mp3"],
+          volume: { min: 1, max: 2 },
+        },
+      });
+
+      fireworks.start();
+    },
+  },
+
+  mounted() {
+    this.startFireworks();
+  },
 };
 </script>
 
 <style scoped>
-body {
+/* body {
   margin: 0;
   padding: 0;
   background: #000;
@@ -22,8 +66,8 @@ body {
 .pyro > .before,
 .pyro > .after {
   position: absolute;
-  width: 5px;
-  height: 5px;
+  width: 1vw;
+  height: 1vw;
   border-radius: 50%;
   box-shadow: -120px -218.66667px blue, 248px -16.66667px #00ff84,
     190px 16.33333px #002bff, -113px -308.66667px #ff009d,
@@ -194,35 +238,35 @@ body {
 @-webkit-keyframes position {
   0%,
   19.9% {
-    margin-top: 10%;
-    margin-left: 40%;
+    margin-top: 10vh;
+    margin-left: 40vw;
   }
 
   20%,
   39.9% {
-    margin-top: 40%;
-    margin-left: 30%;
+    margin-top: 40vh;
+    margin-left: 30vw;
   }
 
   40%,
   59.9% {
-    margin-top: 20%;
-    margin-left: 70%;
+    margin-top: 2vh;
+    margin-left: 70vw;
   }
 
   60%,
   79.9% {
-    margin-top: 30%;
-    margin-left: 20%;
+    margin-top: 30vh;
+    margin-left: 20vw;
   }
 
   80%,
   99.9% {
-    margin-top: 30%;
-    margin-left: 80%;
+    margin-top: 30vh;
+    margin-left: 80vw;
   }
-}
-@-moz-keyframes position {
+} */
+/* @-moz-keyframes position {
   0%,
   19.9% {
     margin-top: 10%;
@@ -345,5 +389,5 @@ body {
     margin-top: 30%;
     margin-left: 80%;
   }
-}
+} */
 </style>

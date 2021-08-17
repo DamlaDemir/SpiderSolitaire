@@ -1,6 +1,6 @@
 <template>
   <div
-    @dragstart="dragStart($event, card, stack, stackIndex)"
+    @dragstart="dragStart($event, card, stack, stackIndex, cardIndex)"
     @dragenter="dragEnter(card, stack, stackIndex)"
     :draggable="card.isDraggable"
     @dragend="dragEnd($event)"
@@ -14,17 +14,14 @@
         :src="getCardImage(card)"
         :draggable="card.isDraggable"
         :id="`card-${stackIndex}${cardIndex}`"
-        class="open-card"
+        class="open-close-card"
       />
     </div>
   </div>
 </template>
 
 <script>
-import EmptyCardHolder from "../components/EmptyCardHolder.vue";
-import { constants } from "../common/constants/constants";
-
-const { cardLetters } = constants;
+import EmptyCardHolder from "@/components/EmptyCardHolder.vue";
 
 export default {
   name: "Card",
@@ -49,10 +46,9 @@ export default {
       require: true,
     },
   },
-  computed: {},
   methods: {
-    dragStart(event, card, cardStack, stackIndex) {
-      this.$emit("dragStart", event, card, cardStack, stackIndex);
+    dragStart(event, card, cardStack, stackIndex, cardIndex) {
+      this.$emit("dragStart", event, card, cardStack, stackIndex, cardIndex);
     },
     dragEnd(event) {
       this.$emit("dragEnd", event);
@@ -60,20 +56,11 @@ export default {
     dragEnter(card, stack, stackIndex) {
       this.$emit("dragEnter", card, stack, stackIndex);
     },
-    getCardNumber(number) {
-      let cardLetter = cardLetters[number];
-
-      if (cardLetter) {
-        return cardLetter;
-      }
-
-      return number;
-    },
     getCardImage(card) {
       if (card.isOpen) {
-        return require(`../../src/assets/images/cards/card-${card.number}.svg`);
+        return require(`@/assets/images/cards/card-${card.number}.svg`);
       } else {
-        return require("../../src/assets/images/cards/close-card.svg");
+        return require("@/assets/images/cards/close-card.svg");
       }
     },
   },
@@ -89,7 +76,7 @@ export default {
   transition: all 0.2s linear;
 }
 
-.open-card:hover {
+.open-close-card:hover {
   background-color: var(--solitaire-red);
   border: 0.5vh solid var(--solitaire-red);
   border-radius: 1vw;

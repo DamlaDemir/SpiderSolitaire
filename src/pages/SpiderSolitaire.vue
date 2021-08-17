@@ -4,6 +4,7 @@
     <header-section
       :score="score"
       @getHints="getHints"
+      @restartGame="restartGame"
       @setTotalTime="setTotalTime"
     />
     <div class="main">
@@ -41,15 +42,14 @@
 </template>
 
 <script>
-import HeaderSection from "../components/HeaderSection.vue";
-import Card from "../components/Card.vue";
-import CardHolderSection from "../components/CardHolderSection.vue";
-import CardDealSection from "../components/CardDealSection.vue";
-import { constants } from "../common/constants/constants";
-import { scoreRuleEnum } from "../common/enums/scoreRuleEnum";
-import { toastrTypeEnum } from "../common/enums/toastrTypeEnum";
-
-import cardFlip from "../assets/audio/card-flip.mp3";
+import HeaderSection from "@/components/HeaderSection.vue";
+import Card from "@/components/Card.vue";
+import CardHolderSection from "@/components/CardHolderSection.vue";
+import CardDealSection from "@/components/CardDealSection.vue";
+import { constants } from "@/common/constants/constants";
+import { scoreRuleEnum } from "@/common/enums/scoreRuleEnum";
+import { toastrTypeEnum } from "@/common/enums/toastrTypeEnum";
+import cardFlip from "@/assets/audio/card-flip.mp3";
 
 // import Fireworks from "../components/Fireworks.vue";
 
@@ -70,8 +70,10 @@ export default {
         this.gameOver();
       }
     },
-    gameOver() {
-      this.calculateScore();
+    isGameOver() {
+      if (this.isGameOver) {
+        this.calculateScore();
+      }
     },
   },
   data() {
@@ -85,6 +87,7 @@ export default {
       targetCard: {},
       targetStackIndex: "",
       movedStackIndex: "",
+      movedCardIndex: "",
       refresh: 0,
       numberOfFullCardHolder: 0,
       cardFlip,
@@ -122,20 +125,22 @@ export default {
 
       this.dealtCards = this.$spiderSolitaireService.getDealtCards(this.cards);
     },
-    dragStart(event, card, cardStack, stackIndex) {
+    dragStart(event, card, cardStack, stackIndex, cardIndex) {
       const target = event.target;
 
-      this.playSound();
+      // this.playSound();
 
       let isDraggable = this.$spiderSolitaireService.isDraggable(
         card,
-        cardStack
+        cardStack,
+        cardIndex
       );
 
       if (isDraggable) {
         this.movedCard = card;
         this.movedCardStack = cardStack;
         this.movedStackIndex = stackIndex;
+        this.movedCardIndex = cardIndex;
 
         event.dataTransfer.setData("card_id", target.id);
 
@@ -155,13 +160,11 @@ export default {
       let isMovable = this.isMovable();
 
       if (isMovable) {
-        let movedCardIndex = this.movedCardStack.indexOf(this.movedCard);
-        const movedCards =
-          movedCardIndex != -1 ? this.movedCardStack.slice(movedCardIndex) : [];
+        const movedCards = this.movedCardStack.slice(this.movedCardIndex);
 
-        this.deleteCardFromStack(this.movedStackIndex, movedCardIndex);
+        this.deleteCardsFromStack(this.movedStackIndex, this.movedCardIndex);
         this.openLastCard(this.movedStackIndex);
-        this.addCardToStack(this.targetStackIndex, movedCards);
+        this.addCardsToStack(this.targetStackIndex, movedCards);
         this.isCompleteHand(this.targetStackIndex);
 
         this.clearHints();
@@ -184,18 +187,18 @@ export default {
     },
     isCompleteHand(stackIndex) {
       let completeHand = false;
-      let openedCards = this.stacks[this.targetStackIndex].filter(
-        (x) => x.isOpen
-      );
+      let openedCards = this.stacks[stackIndex].filter((x) => x.isOpen);
 
       if (openedCards.length >= totalNumberOfCards) {
         completeHand = this.$utils.isSequential(
-          this.stacks[stackIndex].slice(-totalNumberOfCards)
+          this.stacks[stackIndex]
+            .slice(-totalNumberOfCards)
+            .map((card) => card.number)
         );
       }
 
       if (completeHand) {
-        this.deleteCardFromStack(stackIndex, -totalNumberOfCards);
+        this.deleteCardsFromStack(stackIndex, -totalNumberOfCards);
         this.openLastCard(stackIndex);
         this.fillCardHolder();
         this.calculateScore(scoreRuleEnum.completeHand);
@@ -233,17 +236,17 @@ export default {
       let lastIndex = this.stacks[stackIndex].length - 1;
       let lastCard = this.stacks[stackIndex][lastIndex];
 
-      if (lastCard) {
+      if (lastCard && !lastCard.isOpen) {
         lastCard.isOpen = true;
         lastCard.isDraggable = true;
 
         this.calculateScore(scoreRuleEnum.openCard);
       }
     },
-    deleteCardFromStack(stackIndex, cardIndex) {
+    deleteCardsFromStack(stackIndex, cardIndex) {
       this.stacks[stackIndex].splice(cardIndex);
     },
-    addCardToStack(stackIndex, cards) {
+    addCardsToStack(stackIndex, cards) {
       this.stacks[stackIndex] = [...this.stacks[stackIndex], ...cards]; // kaydırıldığı yeni stack'e atılır.
     },
     fillCardHolder() {
@@ -260,9 +263,27 @@ export default {
       this.isGameOver = true;
       this.$toastr.showToastr(toastrTypeEnum.success, "Congratulations !");
     },
-    playSound() {
-      var audio = new Audio(this.cardFlip);
-      audio.play();
+    // playSound() {
+    //   var audio = new Audio(this.cardFlip);
+    //   audio.play();
+    // },
+
+    calculateScore(currentRule) {
+      if (this.isGameOver) {
+        this.score = this.score / 4 + (600 - this.totalTime) * 25;
+      } else {
+        const rule = scoreRules.filter(
+          (scoreRule) => scoreRule.rule === currentRule
+        )[0];
+
+        this.score += rule.points;
+      }
+    },
+    setTotalTime(totalTime) {
+      this.totalTime = totalTime;
+    },
+    restartGame() {
+      window.location.reload();
     },
     clearHints() {
       this.hints = [];
@@ -276,34 +297,34 @@ export default {
       }
 
       if (this.hints.length > 0) {
-        if (this.lastShowedHintIndex < this.hints.length) {
-          let nextHint = this.hints[this.lastShowedHintIndex];
-
-          let targetCard = document.getElementById(
-            `card-${nextHint.targetStackIndex}${nextHint.targetCardIndex}`
-          );
-
-          cardsToMark.push(targetCard);
-
-          nextHint.currentCardIndexes.forEach((currentCard) => {
-            let card = document.getElementById(
-              `card-${nextHint.currentStackIndex}${currentCard}`
-            );
-
-            cardsToMark.push(card);
-          });
-
-          this.markCards(cardsToMark);
-
-          setTimeout(() => {
-            this.markCards(cardsToMark, true);
-          }, 1500);
-
-          this.lastShowedHintIndex++;
-          this.calculateScore(scoreRuleEnum.getHint);
-        } else {
+        if (this.lastShowedHintIndex >= this.hints.length) {
           this.lastShowedHintIndex = 0;
         }
+
+        let nextHint = this.hints[this.lastShowedHintIndex];
+
+        let targetCard = document.getElementById(
+          `card-${nextHint.targetStackIndex}${nextHint.targetCardIndex}`
+        );
+
+        cardsToMark.push(targetCard);
+
+        nextHint.currentCardIndexes.forEach((currentCard) => {
+          let card = document.getElementById(
+            `card-${nextHint.currentStackIndex}${currentCard}`
+          );
+
+          cardsToMark.push(card);
+        });
+
+        this.markCards(cardsToMark);
+
+        setTimeout(() => {
+          this.markCards(cardsToMark, true);
+        }, 1500);
+
+        this.lastShowedHintIndex++;
+        this.calculateScore(scoreRuleEnum.getHint);
       } else {
         let firstDeck = document.getElementById("deck-first");
 
@@ -314,12 +335,12 @@ export default {
     markCards(cards, reset = false) {
       cards.forEach((card) => {
         if (reset) {
-          card.style.border = null;
-          card.style.borderRadius = null;
-          card.style.backgroundColor = null;
+          card.style.border = "";
+          card.style.borderRadius = "";
+          card.style.backgroundColor = "";
         } else {
-          card.style.border = " 1vh solid rgba(226, 39, 41, 0.8)";
-          card.style.backgroundColor = "rgba(226, 39, 41, 0.8)";
+          card.style.border = "1vh solid #874444";
+          card.style.backgroundColor = "#874444";
           card.style.borderRadius = "1vw";
         }
       });
@@ -337,11 +358,10 @@ export default {
             IsSequentialCurrentAndNextCard = isLastCard
               ? true
               : this.$utils.isSequential([
-                  currentStack[currentCardIndex],
-                  currentStack[currentCardIndex + 1],
+                  currentStack[currentCardIndex].number,
+                  currentStack[currentCardIndex + 1].number,
                 ]),
-            currentCardInCurrentStack = currentStack[currentCardIndex],
-            matchingStackIndexes = [];
+            currentCardInCurrentStack = currentStack[currentCardIndex];
 
           if (
             currentCardInCurrentStack.isOpen &&
@@ -350,34 +370,27 @@ export default {
             this.stacks.forEach((targetStack, targetStackIndex) => {
               if (
                 this.$utils.isSequential([
-                  targetStack[targetStack.length - 1],
-                  currentStack[currentCardIndex],
+                  targetStack[targetStack.length - 1].number,
+                  currentStack[currentCardIndex].number,
                 ]) &&
                 targetStackIndex != currentStackIndex
               ) {
-                matchingStackIndexes.push(targetStackIndex);
+                let currentCardIndexes = [];
+
+                currentCardIndexes = Array.from(
+                  { length: currentStack.length - currentCardIndex },
+                  (_, i) => i + currentCardIndex
+                );
+
+                let hint = {
+                  currentStackIndex: currentStackIndex,
+                  currentCardIndexes: currentCardIndexes,
+                  targetStackIndex: targetStackIndex,
+                  targetCardIndex: this.stacks[targetStackIndex].length - 1,
+                };
+
+                hints.push(hint);
               }
-            });
-
-            matchingStackIndexes.forEach((matchingStackIndex) => {
-              let currentCardIndexes = [];
-
-              if (isLastCard) {
-                currentCardIndexes = [currentCardIndex];
-              } else {
-                for (let i = currentCardIndex; i < currentStack.length; i++) {
-                  currentCardIndexes.push(i);
-                }
-              }
-
-              let hint = {
-                currentStackIndex: currentStackIndex,
-                currentCardIndexes: currentCardIndexes,
-                targetStackIndex: matchingStackIndex,
-                targetCardIndex: this.stacks[matchingStackIndex].length - 1,
-              };
-
-              hints.push(hint);
             });
           } else {
             break;
@@ -386,20 +399,6 @@ export default {
       });
 
       this.hints = hints;
-    },
-    calculateScore(currentRule) {
-      if (this.isGameOver) {
-        this.score = this.score / 4 + (600 - this.totalTime) * 25;
-      } else {
-        const rule = scoreRules.filter(
-          (scoreRule) => scoreRule.rule === currentRule
-        )[0];
-
-        this.score += rule.points;
-      }
-    },
-    setTotalTime(totalTime) {
-      this.totalTime = totalTime;
     },
   },
   mounted() {

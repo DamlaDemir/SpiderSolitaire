@@ -2,7 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import Button from "@/components/Button.vue";
 
 describe("Button.vue", () => {
-  it("should display 'restart' when passed button text as 'restart'", async () => {
+  it("Button text should be 'restart' when passed button text as 'restart'", () => {
     const text = "RESTART";
     const expectedText = "RESTART";
 
@@ -18,17 +18,19 @@ describe("Button.vue", () => {
     expect(actualText).toMatch(expectedText);
   });
 
-  it("should uploaded image when passed icon as props", async () => {
+  it("should upload icon when passed icon as props", () => {
     const icon = "hint";
+    const text = "HINT";
 
     const wrapper = shallowMount(Button, {
       propsData: {
-        text: "HINT",
+        text: text,
         icon: icon,
       },
     });
 
-    const actualImg = wrapper.findAll("#buttonIcon");
-    expect(actualImg.length).toBe(1);
+    const actualIcon = wrapper.findAll("#buttonIcon");
+
+    expect(actualIcon.exists()).toBeTruthy();
   });
 });

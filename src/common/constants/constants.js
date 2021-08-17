@@ -1,7 +1,6 @@
 import { scoreRuleEnum } from "../enums/scoreRuleEnum";
 
 export const constants = {
-  cardLetters: { 1: "A", 11: "J", 12: "Q", 13: "K" },
   totalNumberOfDecks: 8,
   totalNumberOfCards: 13,
   splitCardInfo: {

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SpiderSolitaire from "./pages/SpiderSolitaire.vue";
+import SpiderSolitaire from "@/pages/SpiderSolitaire.vue";
 
 export default {
   name: "App",
@@ -17,7 +17,7 @@ export default {
 
 <style>
 :root {
-  --solitaire-red: rgba(226, 39, 41, 0.8);
+  --solitaire-red: #874444;
   --solitaire-dark-blue: #576472;
   --solitaire-blue: #48697c;
   --solitaire-light-blue: rgb(94, 131, 155);

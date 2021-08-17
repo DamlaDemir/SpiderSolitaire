@@ -1,8 +1,8 @@
 import Vue from "vue";
 import App from "./App.vue";
-import spiderSolitaireService from "./common/services/spiderSolitaireService";
-import utils from "./common/helpers/utils";
-import Toastr from "./components/Toastr/Toastr";
+import spiderSolitaireService from "@/services/spiderSolitaireService";
+import utils from "@/common/helpers/utils";
+import Toastr from "@/components/Toastr/Toastr";
 
 require("./components/Toastr/Toastr.css");
 
