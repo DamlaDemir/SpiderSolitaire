@@ -47,7 +47,7 @@ describe("Card.vue", () => {
       },
     });
 
-    const actualCard = wrapper.findAll(".open-close-card");
+    const actualCard = wrapper.findAll(".open-card");
 
     expect(actualCard.exists()).toBe(true);
   });
@@ -82,7 +82,7 @@ describe("Card.vue", () => {
       },
     });
 
-    const actualCard = wrapper.findAll(".open-close-card");
+    const actualCard = wrapper.findAll(".close-card");
 
     expect(actualCard.exists()).toBe(true);
   });
@@ -90,13 +90,13 @@ describe("Card.vue", () => {
   it("should display empty card holder", () => {
     const card = {
       number: -1,
-      isOpen: false,
+      isOpen: true,
       isDraggable: false,
     };
     const cardStack = [
       {
         number: -1,
-        isOpen: false,
+        isOpen: true,
         isDraggable: false,
       },
       {
@@ -222,7 +222,7 @@ describe("Card.vue", () => {
       },
     });
 
-    wrapper.vm.dragEnter(card, cardStack, stackIndex);
+    wrapper.vm.dragEnter(card, cardStack, cardIndex, stackIndex);
 
     expect(wrapper.emitted().dragEnter).toBeTruthy();
   });

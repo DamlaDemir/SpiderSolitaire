@@ -1,20 +1,29 @@
 <template>
-  <div
-    @dragstart="dragStart($event, card, stack, stackIndex, cardIndex)"
-    @dragenter="dragEnter(card, stack, stackIndex)"
-    :draggable="card.isDraggable"
-    @dragend="dragEnd($event)"
-    @dragover.prevent
-    class="card"
-    :class="card.number === -1 ? 'empty-card-holder' : ''"
-  >
-    <empty-card-holder v-if="card.number === -1" />
-    <div v-else>
+  <div>
+    <div
+      v-if="card.isOpen"
+      @dragstart="dragStart($event, card, stack, stackIndex, cardIndex)"
+      @dragenter="dragEnter(card, stack, cardIndex, stackIndex)"
+      :draggable="card.isDraggable"
+      @dragend="dragEnd($event)"
+      @dragover.prevent
+      class="card"
+      :class="card.number === -1 ? 'empty-card-holder' : ''"
+    >
+      <empty-card-holder v-if="card.number === -1" />
+      <img
+        v-else
+        :src="getCardImage(card)"
+        :draggable="card.isDraggable"
+        :id="`card-${stackIndex}${cardIndex}`"
+        class="open-card"
+      />
+    </div>
+    <div v-else class="card close-card">
       <img
         :src="getCardImage(card)"
         :draggable="card.isDraggable"
         :id="`card-${stackIndex}${cardIndex}`"
-        class="open-close-card"
       />
     </div>
   </div>
@@ -53,8 +62,8 @@ export default {
     dragEnd(event) {
       this.$emit("dragEnd", event);
     },
-    dragEnter(card, stack, stackIndex) {
-      this.$emit("dragEnter", card, stack, stackIndex);
+    dragEnter(card, stack, cardIndex, stackIndex) {
+      this.$emit("dragEnter", card, stack, cardIndex, stackIndex);
     },
     getCardImage(card) {
       if (card.isOpen) {
@@ -76,16 +85,11 @@ export default {
   transition: all 0.2s linear;
 }
 
-.open-close-card:hover {
+.open-card:hover {
   background-color: var(--solitaire-red);
   border: 0.5vh solid var(--solitaire-red);
   border-radius: 1vw;
 }
-
-/* .close-card {
-  width: 6.7vw;
-  height: 9.2vw;
-} */
 
 .empty-card-holder {
   margin-bottom: -9vw;

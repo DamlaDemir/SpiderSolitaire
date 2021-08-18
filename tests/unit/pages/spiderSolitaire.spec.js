@@ -366,10 +366,16 @@ describe("spiderSolitaire.vue", () => {
         },
       ];
       const targetStackIndex = 0;
+      const targetCardIndex = 2;
 
       const wrapper = await shallowMount(spiderSolitaire);
 
-      wrapper.vm.dragEnter(targetCard, targetCardStack, targetStackIndex);
+      wrapper.vm.dragEnter(
+        targetCard,
+        targetCardStack,
+        targetCardIndex,
+        targetStackIndex
+      );
 
       const actualTargetCard = wrapper.vm.targetCard;
       const actualTargetStack = wrapper.vm.targetStack;
@@ -1239,6 +1245,35 @@ describe("spiderSolitaire.vue", () => {
       const wrapper = shallowMount(spiderSolitaire);
 
       wrapper.setData({ movedCard, targetCard });
+
+      const actualResult = wrapper.vm.isMovable();
+
+      expect(actualResult).toBe(expectedResult);
+    });
+
+    it("should return true if target card is empty card holder", () => {
+      const movedCard = {
+        number: 10,
+        isOpen: true,
+        isDraggable: true,
+      };
+      const targetCard = {
+        number: -1,
+        isOpen: true,
+        isDraggable: false,
+      };
+      const targetStack = [
+        {
+          number: -1,
+          isOpen: true,
+          isDraggable: false,
+        },
+      ];
+      const expectedResult = true;
+
+      const wrapper = shallowMount(spiderSolitaire);
+
+      wrapper.setData({ movedCard, targetCard, targetStack });
 
       const actualResult = wrapper.vm.isMovable();
 

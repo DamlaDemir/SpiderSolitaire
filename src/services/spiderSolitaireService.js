@@ -82,7 +82,7 @@ const spiderSolitaireService = {
       stacks.forEach((stack) => {
         stack.unshift({
           number: -1,
-          isOpen: false,
+          isOpen: true,
           isDraggable: false,
         });
       });
@@ -97,15 +97,13 @@ const spiderSolitaireService = {
   getDealtCards(cards) {
     return cards.slice(secondSectionLastCardIndex);
   },
-  isDraggable(card, cardStack, cardIndex) {
+  isDraggable(cardStack, cardIndex) {
     try {
       let bottomCards = cardStack.slice(cardIndex);
 
       const isDraggable = utils.isSequential(
         bottomCards.map((card) => card.number)
       );
-
-      card.isDraggable = isDraggable;
 
       return isDraggable;
     } catch (err) {

@@ -10,9 +10,9 @@
         class="deck"
       />
       <img
-        src="../../src/assets/images/cards/close-card2.jpg"
+        src="../../src/assets/images/cards/close-card.svg"
         @click="$emit('dealCards')"
-        class="deck deck-first"
+        class="deck"
         id="deck-first"
       />
     </div>

@@ -131,7 +131,6 @@ export default {
       // this.playSound();
 
       let isDraggable = this.$spiderSolitaireService.isDraggable(
-        card,
         cardStack,
         cardIndex
       );
@@ -180,10 +179,14 @@ export default {
         cardElement.style.display = "block";
       }
     },
-    dragEnter(card, stack, stackIndex) {
-      this.targetCard = card;
-      this.targetStack = stack;
-      this.targetStackIndex = stackIndex;
+    dragEnter(card, stack, cardIndex, stackIndex) {
+      let isLastCard = cardIndex == stack.length - 1;
+
+      if (isLastCard) {
+        this.targetCard = card;
+        this.targetStack = stack;
+        this.targetStackIndex = stackIndex;
+      }
     },
     isCompleteHand(stackIndex) {
       let completeHand = false;
@@ -236,7 +239,7 @@ export default {
       let lastIndex = this.stacks[stackIndex].length - 1;
       let lastCard = this.stacks[stackIndex][lastIndex];
 
-      if (lastCard && !lastCard.isOpen) {
+      if (lastCard && !lastCard.isOpen && lastCard.number != -1) {
         lastCard.isOpen = true;
         lastCard.isDraggable = true;
 
@@ -253,9 +256,10 @@ export default {
       this.numberOfFullCardHolder++;
     },
     isMovable() {
+      let isCardHolder =
+        this.targetStack.length === 1 && this.targetStack[0].number == -1;
       let isMovable =
-        this.movedCard.number - this.targetCard.number === 1 ||
-        this.targetCard.number === -1;
+        this.movedCard.number - this.targetCard.number === 1 || isCardHolder;
 
       return isMovable;
     },
@@ -321,7 +325,7 @@ export default {
 
         setTimeout(() => {
           this.markCards(cardsToMark, true);
-        }, 1500);
+        }, 1000);
 
         this.lastShowedHintIndex++;
         this.calculateScore(scoreRuleEnum.getHint);
@@ -424,6 +428,6 @@ export default {
 }
 
 .stack {
-  margin: 3.5vw 0;
+  margin: 1.5vw 0;
 }
 </style>

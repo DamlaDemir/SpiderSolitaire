@@ -203,11 +203,6 @@ describe("spiderSolitaireService.js", () => {
   describe("isDraggable function", () => {
     it("should return true for cards that are sequential", () => {
       const cardIndex = 1;
-      const card = {
-        number: 5,
-        isOpen: true,
-        isDraggable: false,
-      };
       const stack = [
         {
           number: 1,
@@ -226,22 +221,13 @@ describe("spiderSolitaireService.js", () => {
         },
       ];
 
-      let actualResult = spiderSolitaireService.isDraggable(
-        card,
-        stack,
-        cardIndex
-      );
+      let actualResult = spiderSolitaireService.isDraggable(stack, cardIndex);
 
       expect(actualResult).toBe(true);
     });
 
     it("should return false for cards that aren't sequential", () => {
       const cardIndex = 1;
-      const card = {
-        number: 5,
-        isOpen: true,
-        isDraggable: false,
-      };
       const stack = [
         {
           number: 1,
@@ -260,28 +246,19 @@ describe("spiderSolitaireService.js", () => {
         },
       ];
 
-      let actualResult = spiderSolitaireService.isDraggable(
-        card,
-        stack,
-        cardIndex
-      );
+      let actualResult = spiderSolitaireService.isDraggable(stack, cardIndex);
 
       expect(actualResult).toBe(false);
     });
 
     it("should throw error when card stack is undefined", () => {
       const cardIndex = 1;
-      const card = {
-        number: 5,
-        isOpen: true,
-        isDraggable: false,
-      };
       const stack = undefined;
       const expectedError =
         "Error ! Msg: Cannot read property 'slice' of undefined";
 
       let actualResult = () =>
-        spiderSolitaireService.isDraggable(card, stack, cardIndex);
+        spiderSolitaireService.isDraggable(stack, cardIndex);
 
       expect(actualResult).toThrowError(expectedError);
       expect(mockLog).toBeCalledWith(expectedError);
