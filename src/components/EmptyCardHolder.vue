@@ -34,6 +34,7 @@ export default {
   background-color: var(--solitaire-light-white);
   background-image: linear-gradient(
     var(--solitaire-very-light-blue),
+    var(--solitaire-light-white),
     var(--solitaire-light-white)
   );
 }

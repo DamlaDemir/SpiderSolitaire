@@ -34,4 +34,13 @@ describe("HeaderSection.vue", () => {
 
     expect(actualTimerComponents).toHaveLength(expectedTimerComponentCount);
   });
+
+  it("should emit setTotalTime function", () => {
+    const totalTime = 3;
+    const wrapper = shallowMount(HeaderSection);
+
+    wrapper.vm.setTotalTime(totalTime);
+
+    expect(wrapper.emitted().setTotalTime).toBeTruthy();
+  });
 });

@@ -1,7 +1,7 @@
 <template>
   <div class="header-item">
     <img :src="getIcon(icon)" class="header-item-icon" id="buttonIcon" />
-    <div class="header-item-text button" @click="$emit('onClick')">
+    <div class="header-item-text button" @click="onClick">
       {{ text }}
     </div>
   </div>
@@ -21,6 +21,9 @@ export default {
     },
   },
   methods: {
+    onClick() {
+      this.$emit("onClick");
+    },
     getIcon(icon) {
       return require(`@/assets/images/icons/${icon}.svg`);
     },
@@ -31,5 +34,9 @@ export default {
 <style>
 .button {
   min-width: 5.5vw;
+}
+
+.button:hover {
+  cursor: pointer;
 }
 </style>

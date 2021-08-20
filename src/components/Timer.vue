@@ -8,9 +8,23 @@
 <script>
 export default {
   name: "Timer",
+  props: {
+    isGameOver: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  watch: {
+    isGameOver() {
+      if (this.isGameOver) {
+        this.stop();
+      }
+    },
+  },
   data() {
     return {
       elapsedTime: 0,
+      timer: undefined,
     };
   },
   computed: {
@@ -27,9 +41,12 @@ export default {
   },
   methods: {
     start() {
-      setInterval(() => {
+      this.timer = setInterval(() => {
         this.elapsedTime += 1000;
       }, 1000);
+    },
+    stop() {
+      clearInterval(this.timer);
     },
   },
   mounted() {

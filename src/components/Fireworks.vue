@@ -1,393 +1,235 @@
 <template>
-  <div class="fireworks-example"><slot /></div>
+  <div>
+    <div :class="`firework-${item}`" v-for="item in 13" :key="item">
+      <div :class="`firework-${item + 1}`"></div>
+    </div>
+    <div class="title">You are winner ! Congratulations !</div>
+  </div>
 </template>
 
 <script>
-import { Fireworks } from "fireworks-js";
-
 export default {
   name: "Fireworks",
-  methods: {
-    startFireworks() {
-      const container = document.querySelector(".fireworks-example");
-      const fireworks = new Fireworks(container, {
-        rocketsPoint: 10,
-        hue: { min: 0, max: 360 },
-        delay: { min: 15, max: 30 },
-        speed: 2,
-        acceleration: 1.05,
-        friction: 0.95,
-        gravity: 1.5,
-        particles: 50,
-        trace: 3,
-        explosion: 5,
-        autoresize: true,
-        brightness: {
-          min: 50,
-          max: 80,
-          decay: { min: 0.015, max: 0.03 },
-        },
-        mouse: {
-          click: false,
-          move: false,
-          max: 3,
-        },
-        boundaries: {
-          x: 50,
-          y: 50,
-          width: container.clientWidth,
-          height: container.clientHeight,
-        },
-        sound: {
-          enable: true,
-          files: ["explosion0.mp3", "explosion1.mp3", "explosion2.mp3"],
-          volume: { min: 1, max: 2 },
-        },
-      });
-
-      fireworks.start();
-    },
-  },
-
-  mounted() {
-    this.startFireworks();
-  },
 };
 </script>
 
-<style scoped>
-/* body {
-  margin: 0;
-  padding: 0;
-  background: #000;
-  overflow: hidden;
+<style>
+html {
+  font-size: calc(100vmax / 1500 * 100);
 }
-
-.pyro > .before,
-.pyro > .after {
+.title {
+  color: #fff;
+  text-shadow: 0.5vw 0.5vw #576472;
   position: absolute;
-  width: 1vw;
-  height: 1vw;
-  border-radius: 50%;
-  box-shadow: -120px -218.66667px blue, 248px -16.66667px #00ff84,
-    190px 16.33333px #002bff, -113px -308.66667px #ff009d,
-    -109px -287.66667px #ffb300, -50px -313.66667px #ff006e,
-    226px -31.66667px #ff4000, 180px -351.66667px #ff00d0,
-    -12px -338.66667px #00f6ff, 220px -388.66667px #99ff00,
-    -69px -27.66667px #ff0400, -111px -339.66667px #6200ff,
-    155px -237.66667px #00ddff, -152px -380.66667px #00ffd0,
-    -50px -37.66667px #00ffdd, -95px -175.66667px #a6ff00,
-    -88px 10.33333px #0d00ff, 112px -309.66667px #005eff,
-    69px -415.66667px #ff00a6, 168px -100.66667px #ff004c,
-    -244px 24.33333px #ff6600, 97px -325.66667px #ff0066,
-    -211px -182.66667px #00ffa2, 236px -126.66667px #b700ff,
-    140px -196.66667px #9000ff, 125px -175.66667px #00bbff,
-    118px -381.66667px #ff002f, 144px -111.66667px #ffae00,
-    36px -78.66667px #f600ff, -63px -196.66667px #c800ff,
-    -218px -227.66667px #d4ff00, -134px -377.66667px #ea00ff,
-    -36px -412.66667px #ff00d4, 209px -106.66667px #00fff2,
-    91px -278.66667px #000dff, -22px -191.66667px #9dff00,
-    139px -392.66667px #a6ff00, 56px -2.66667px #0099ff,
-    -156px -276.66667px #ea00ff, -163px -233.66667px #00fffb,
-    -238px -346.66667px #00ff73, 62px -363.66667px #0088ff,
-    244px -170.66667px #0062ff, 224px -142.66667px #b300ff,
-    141px -208.66667px #9000ff, 211px -285.66667px #ff6600,
-    181px -128.66667px #1e00ff, 90px -123.66667px #c800ff,
-    189px 70.33333px #00ffc8, -18px -383.66667px #00ff33,
-    100px -6.66667px #ff008c;
-  -moz-animation: 1s bang ease-out infinite backwards,
-    1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-  -webkit-animation: 1s bang ease-out infinite backwards,
-    1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-  -o-animation: 1s bang ease-out infinite backwards,
-    1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-  -ms-animation: 1s bang ease-out infinite backwards,
-    1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
-  animation: 1s bang ease-out infinite backwards,
-    1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+  top: 25%;
+  left: 25%;
 }
 
-.pyro > .after {
-  -moz-animation-delay: 1.25s, 1.25s, 1.25s;
-  -webkit-animation-delay: 1.25s, 1.25s, 1.25s;
-  -o-animation-delay: 1.25s, 1.25s, 1.25s;
-  -ms-animation-delay: 1.25s, 1.25s, 1.25s;
-  animation-delay: 1.25s, 1.25s, 1.25s;
-  -moz-animation-duration: 1.25s, 1.25s, 6.25s;
-  -webkit-animation-duration: 1.25s, 1.25s, 6.25s;
-  -o-animation-duration: 1.25s, 1.25s, 6.25s;
-  -ms-animation-duration: 1.25s, 1.25s, 6.25s;
-  animation-duration: 1.25s, 1.25s, 6.25s;
+[class^="firework-"] {
+  position: absolute;
+  width: 0.1rem;
+  height: 0.1rem;
+  border-radius: 100%;
 }
 
-@-webkit-keyframes bang {
-  from {
-    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white;
-  }
+.firework-1 {
+  -webkit-animation: firework-md 1.2s both infinite;
+  animation: firework-md 1.2s both infinite;
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+  top: 80%;
+  left: 6%;
 }
-@-moz-keyframes bang {
-  from {
-    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white;
-  }
+
+.firework-2 {
+  -webkit-animation: firework-lg 1.2s both infinite;
+  animation: firework-lg 1.2s both infinite;
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+  top: 85%;
+  left: 40%;
 }
-@-o-keyframes bang {
-  from {
-    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white;
-  }
+
+.firework-3 {
+  -webkit-animation: firework-lg 1.2s both infinite;
+  animation: firework-lg 1.2s both infinite;
+  -webkit-animation-delay: 1.1s;
+  animation-delay: 1.1s;
+  top: 20%;
+  left: 30%;
 }
-@-ms-keyframes bang {
-  from {
-    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white;
-  }
+
+.firework-4 {
+  -webkit-animation: firework-sm 1.2s both infinite;
+  animation: firework-sm 1.2s both infinite;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+  top: 80%;
+  left: 90%;
 }
-@keyframes bang {
-  from {
-    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white,
-      0 0 white, 0 0 white, 0 0 white;
-  }
+
+.firework-5 {
+  -webkit-animation: firework-lg 1.2s both infinite;
+  animation: firework-lg 1.2s both infinite;
+  -webkit-animation-delay: 1.2s;
+  animation-delay: 1.2s;
+  top: 45%;
+  left: 45%;
 }
-@-webkit-keyframes gravity {
-  to {
-    transform: translateY(200px);
-    -moz-transform: translateY(200px);
-    -webkit-transform: translateY(200px);
-    -o-transform: translateY(200px);
-    -ms-transform: translateY(200px);
+
+.firework-6 {
+  -webkit-animation: firework-md 1.2s both infinite;
+  animation: firework-md 1.2s both infinite;
+  -webkit-animation-delay: 1.4s;
+  animation-delay: 1.4s;
+  top: 90%;
+  left: 60%;
+}
+
+.firework-7 {
+  -webkit-animation: firework-sm 1.2s both infinite;
+  animation: firework-sm 1.2s both infinite;
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+  top: 15%;
+  left: 50%;
+}
+
+.firework-8 {
+  -webkit-animation: firework-sm 1.2s both infinite;
+  animation: firework-sm 1.2s both infinite;
+  -webkit-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+  top: 20%;
+  left: 5%;
+}
+
+.firework-9 {
+  -webkit-animation: firework-md 1.2s both infinite;
+  animation: firework-md 1.2s both infinite;
+  -webkit-animation-delay: 1.3s;
+  animation-delay: 1.3s;
+  top: 40%;
+  left: 15%;
+}
+
+.firework-10 {
+  -webkit-animation: firework-sm 1.2s both infinite;
+  animation: firework-sm 1.2s both infinite;
+  -webkit-animation-delay: 1.3s;
+  animation-delay: 1.3s;
+  top: 50%;
+  left: 65%;
+}
+
+.firework-11 {
+  -webkit-animation: firework-sm 1.2s both infinite;
+  animation: firework-sm 1.2s both infinite;
+  -webkit-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+  top: 80%;
+  left: 20%;
+}
+
+.firework-12 {
+  -webkit-animation: firework-md 1.2s both infinite;
+  animation: firework-md 1.2s both infinite;
+  -webkit-animation-delay: 1.3s;
+  animation-delay: 1.3s;
+  top: 50%;
+  left: 85%;
+}
+
+.firework-13 {
+  -webkit-animation: firework-md 1.2s both infinite;
+  animation: firework-md 1.2s both infinite;
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+  top: 20%;
+  left: 90%;
+}
+
+.firework-14 {
+  -webkit-animation: firework-lg 1.2s both infinite;
+  animation: firework-lg 1.2s both infinite;
+  -webkit-animation-delay: 1.3s;
+  animation-delay: 1.3s;
+  top: 15%;
+  left: 70%;
+}
+
+.firework-15 {
+  -webkit-animation: firework-md 1.2s both infinite;
+  animation: firework-xl 1.2s both infinite;
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+  top: 70%;
+  left: 40%;
+}
+
+@keyframes firework-sm {
+  0%,
+  100% {
     opacity: 0;
   }
+  10%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    box-shadow: -0.5rem 0rem 0 var(--solitaire-purple),
+      0.5rem 0rem 0 var(--solitaire-purple),
+      0rem -0.5rem 0 var(--solitaire-purple),
+      0rem 0.5rem 0 var(--solitaire-purple),
+      0.35rem -0.35rem 0 var(--solitaire-purple),
+      0.35rem 0.35rem 0 var(--solitaire-purple),
+      -0.35rem -0.35rem 0 var(--solitaire-purple),
+      -0.35rem 0.35rem 0 var(--solitaire-purple),
+      -0.35rem 0.35rem 0 var(--solitaire-purple),
+      -0.35rem 0.35rem 0 var(--solitaire-purple);
+  }
 }
-@-moz-keyframes gravity {
-  to {
-    transform: translateY(200px);
-    -moz-transform: translateY(200px);
-    -webkit-transform: translateY(200px);
-    -o-transform: translateY(200px);
-    -ms-transform: translateY(200px);
+@keyframes firework-md {
+  0%,
+  100% {
     opacity: 0;
   }
+  10%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    box-shadow: -0.7rem 0rem 0 var(--solitaire-pink),
+      0.7rem 0rem 0 var(--solitaire-pink), 0rem -0.7rem 0 var(--solitaire-pink),
+      0rem 0.7rem 0 var(--solitaire-pink),
+      0.49rem -0.49rem 0 var(--solitaire-pink),
+      0.49rem 0.49rem 0 var(--solitaire-pink),
+      -0.49rem -0.49rem 0 var(--solitaire-pink),
+      -0.49rem 0.49rem 0 var(--solitaire-pink),
+      -0.49rem 0.49rem 0 var(--solitaire-pink),
+      -0.49rem 0.49rem 0 var(--solitaire-pink);
+  }
 }
-@-o-keyframes gravity {
-  to {
-    transform: translateY(200px);
-    -moz-transform: translateY(200px);
-    -webkit-transform: translateY(200px);
-    -o-transform: translateY(200px);
-    -ms-transform: translateY(200px);
+@keyframes firework-lg {
+  0%,
+  100% {
     opacity: 0;
   }
-}
-@-ms-keyframes gravity {
-  to {
-    transform: translateY(200px);
-    -moz-transform: translateY(200px);
-    -webkit-transform: translateY(200px);
-    -o-transform: translateY(200px);
-    -ms-transform: translateY(200px);
-    opacity: 0;
+  10%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    box-shadow: -0.9rem 0rem 0 var(--solitaire-yellow),
+      0.9rem 0rem 0 var(--solitaire-yellow),
+      0rem -0.9rem 0 var(--solitaire-yellow),
+      0rem 0.9rem 0 var(--solitaire-yellow),
+      0.63rem -0.63rem 0 var(--solitaire-yellow),
+      0.63rem 0.63rem 0 var(--solitaire-yellow),
+      -0.63rem -0.63rem 0 var(--solitaire-yellow),
+      -0.63rem 0.63rem 0 var(--solitaire-yellow),
+      -0.63rem 0.63rem 0 var(--solitaire-yellow),
+      -0.63rem 0.63rem 0 var(--solitaire-yellow);
   }
 }
-@keyframes gravity {
-  to {
-    transform: translateY(200px);
-    -moz-transform: translateY(200px);
-    -webkit-transform: translateY(200px);
-    -o-transform: translateY(200px);
-    -ms-transform: translateY(200px);
-    opacity: 0;
-  }
-}
-@-webkit-keyframes position {
-  0%,
-  19.9% {
-    margin-top: 10vh;
-    margin-left: 40vw;
-  }
-
-  20%,
-  39.9% {
-    margin-top: 40vh;
-    margin-left: 30vw;
-  }
-
-  40%,
-  59.9% {
-    margin-top: 2vh;
-    margin-left: 70vw;
-  }
-
-  60%,
-  79.9% {
-    margin-top: 30vh;
-    margin-left: 20vw;
-  }
-
-  80%,
-  99.9% {
-    margin-top: 30vh;
-    margin-left: 80vw;
-  }
-} */
-/* @-moz-keyframes position {
-  0%,
-  19.9% {
-    margin-top: 10%;
-    margin-left: 40%;
-  }
-
-  20%,
-  39.9% {
-    margin-top: 40%;
-    margin-left: 30%;
-  }
-
-  40%,
-  59.9% {
-    margin-top: 20%;
-    margin-left: 70%;
-  }
-
-  60%,
-  79.9% {
-    margin-top: 30%;
-    margin-left: 20%;
-  }
-
-  80%,
-  99.9% {
-    margin-top: 30%;
-    margin-left: 80%;
-  }
-}
-@-o-keyframes position {
-  0%,
-  19.9% {
-    margin-top: 10%;
-    margin-left: 40%;
-  }
-
-  20%,
-  39.9% {
-    margin-top: 40%;
-    margin-left: 30%;
-  }
-
-  40%,
-  59.9% {
-    margin-top: 20%;
-    margin-left: 70%;
-  }
-
-  60%,
-  79.9% {
-    margin-top: 30%;
-    margin-left: 20%;
-  }
-
-  80%,
-  99.9% {
-    margin-top: 30%;
-    margin-left: 80%;
-  }
-}
-@-ms-keyframes position {
-  0%,
-  19.9% {
-    margin-top: 10%;
-    margin-left: 40%;
-  }
-
-  20%,
-  39.9% {
-    margin-top: 40%;
-    margin-left: 30%;
-  }
-
-  40%,
-  59.9% {
-    margin-top: 20%;
-    margin-left: 70%;
-  }
-
-  60%,
-  79.9% {
-    margin-top: 30%;
-    margin-left: 20%;
-  }
-
-  80%,
-  99.9% {
-    margin-top: 30%;
-    margin-left: 80%;
-  }
-}
-@keyframes position {
-  0%,
-  19.9% {
-    margin-top: 10%;
-    margin-left: 40%;
-  }
-
-  20%,
-  39.9% {
-    margin-top: 40%;
-    margin-left: 30%;
-  }
-
-  40%,
-  59.9% {
-    margin-top: 20%;
-    margin-left: 70%;
-  }
-
-  60%,
-  79.9% {
-    margin-top: 30%;
-    margin-left: 20%;
-  }
-
-  80%,
-  99.9% {
-    margin-top: 30%;
-    margin-left: 80%;
-  }
-} */
 </style>

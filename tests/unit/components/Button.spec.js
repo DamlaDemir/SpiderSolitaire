@@ -33,4 +33,20 @@ describe("Button.vue", () => {
 
     expect(actualIcon.exists()).toBeTruthy();
   });
+
+  it("should emit onClick function", () => {
+    const icon = "hint";
+    const text = "HINT";
+
+    const wrapper = shallowMount(Button, {
+      propsData: {
+        text: text,
+        icon: icon,
+      },
+    });
+
+    wrapper.vm.onClick();
+
+    expect(wrapper.emitted().onClick).toBeTruthy();
+  });
 });

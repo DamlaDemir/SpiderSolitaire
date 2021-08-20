@@ -1,11 +1,12 @@
 <template>
   <div>
-    <!-- <fireworks v-if="isGameOver" /> -->
+    <fireworks v-if="isGameOver" />
     <header-section
       :score="score"
       @getHints="getHints"
-      @restartGame="restartGame"
+      @openConfirmBox="changeConfirmBoxVisibility"
       @setTotalTime="setTotalTime"
+      :isGameOver="isGameOver"
     />
     <div class="main">
       <div class="card-deal-holder-section">
@@ -38,6 +39,11 @@
         </div>
       </div>
     </div>
+    <confirm-box
+      :showConfirm="showConfirm"
+      @accept="restartGame"
+      @changeConfirmBoxVisibility="changeConfirmBoxVisibility"
+    />
   </div>
 </template>
 
@@ -46,12 +52,13 @@ import HeaderSection from "@/components/HeaderSection.vue";
 import Card from "@/components/Card.vue";
 import CardHolderSection from "@/components/CardHolderSection.vue";
 import CardDealSection from "@/components/CardDealSection.vue";
+import Fireworks from "@/components/Fireworks.vue";
+import ConfirmBox from "@/components/ConfirmBox.vue";
 import { constants } from "@/common/constants/constants";
 import { scoreRuleEnum } from "@/common/enums/scoreRuleEnum";
 import { toastrTypeEnum } from "@/common/enums/toastrTypeEnum";
-import cardFlip from "@/assets/audio/card-flip.mp3";
 
-// import Fireworks from "../components/Fireworks.vue";
+// import cardFlip from "@/assets/audio/card-flip.mp3";
 
 const { totalNumberOfDecks, totalNumberOfCards, scoreRules } = constants;
 
@@ -61,8 +68,9 @@ export default {
     HeaderSection,
     Card,
     CardHolderSection,
-    // Fireworks,
+    Fireworks,
     CardDealSection,
+    ConfirmBox,
   },
   watch: {
     numberOfFullCardHolder() {
@@ -90,7 +98,7 @@ export default {
       movedCardIndex: "",
       refresh: 0,
       numberOfFullCardHolder: 0,
-      cardFlip,
+      // cardFlip,
       totalTime: 0,
       numberOfToDealtDeck: 5,
       totalNumberOfDecks: totalNumberOfDecks,
@@ -98,6 +106,7 @@ export default {
       isGameOver: false,
       hints: [],
       lastShowedHintIndex: 0,
+      showConfirm: false,
     };
   },
   computed: {},
@@ -213,16 +222,18 @@ export default {
       const isThereEmptyStack = this.isThereEmptyStack();
 
       if (!isThereEmptyStack) {
-        this.stacks.forEach((stack) => {
+        this.numberOfToDealtDeck--;
+        this.clearHints();
+
+        this.stacks.forEach((stack, stackIndex) => {
           let newCard = this.dealtCards.pop();
           newCard.isOpen = true;
           newCard.isDraggable = true;
 
           stack.push(newCard);
-        });
 
-        this.numberOfToDealtDeck--;
-        this.clearHints();
+          this.isCompleteHand(stackIndex);
+        });
       } else {
         this.$toastr.showToastr(
           toastrTypeEnum.warning,
@@ -265,7 +276,6 @@ export default {
     },
     gameOver() {
       this.isGameOver = true;
-      this.$toastr.showToastr(toastrTypeEnum.success, "Congratulations !");
     },
     // playSound() {
     //   var audio = new Audio(this.cardFlip);
@@ -285,6 +295,9 @@ export default {
     },
     setTotalTime(totalTime) {
       this.totalTime = totalTime;
+    },
+    changeConfirmBoxVisibility() {
+      this.showConfirm = !this.showConfirm;
     },
     restartGame() {
       window.location.reload();

@@ -29,4 +29,16 @@ describe("Timer.vue", () => {
 
     expect(actualElapsedTime).toBe(expectedElapsedTime);
   });
+
+  it("should stop the timer when game is over", async () => {
+    const elapsedTime = 3 * 1000;
+
+    const wrapper = shallowMount(Timer);
+
+    jest.runTimersToTime(elapsedTime);
+
+    await wrapper.setProps({ isGameOver: true });
+
+    expect(clearInterval).toHaveBeenCalledWith(expect.any(Number));
+  });
 });

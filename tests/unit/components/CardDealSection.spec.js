@@ -33,4 +33,12 @@ describe("CardDealSection.vue", () => {
     expect(actualEmptyCardHolder.exists()).toBe(true);
     expect(actualDealtCards.exists()).toBe(false);
   });
+
+  it("should emit dealCards function", () => {
+    const wrapper = shallowMount(CardDealSection);
+
+    wrapper.vm.dealCards();
+
+    expect(wrapper.emitted().dealCards).toBeTruthy();
+  });
 });

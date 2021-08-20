@@ -6,12 +6,12 @@
         v-for="index in numberOfToDealtDeck - 1"
         :key="index"
         src="../../src/assets/images/cards/close-card.svg"
-        @click="$emit('dealCards')"
+        @click="dealCards"
         class="deck"
       />
       <img
         src="../../src/assets/images/cards/close-card.svg"
-        @click="$emit('dealCards')"
+        @click="dealCards"
         class="deck"
         id="deck-first"
       />
@@ -31,6 +31,12 @@ export default {
     numberOfToDealtDeck: {
       typeof: Number,
       require: true,
+      default: 5,
+    },
+  },
+  methods: {
+    dealCards() {
+      this.$emit("dealCards");
     },
   },
 };

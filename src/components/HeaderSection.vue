@@ -1,14 +1,14 @@
 <template>
   <div class="header-section">
     <div class="header-item-section">
-      <Button icon="restart" text="RESTART" @onClick="$emit('restartGame')" />
+      <Button icon="restart" text="RESTART" @onClick="$emit('openConfirmBox')" />
       <Button icon="hint" text="HINT" @onClick="$emit('getHints')" />
     </div>
 
     <div class="header-text">ONE SUIT SOLITAIRE</div>
     <div class="header-item-section">
       <score :score="score" />
-      <timer @setTotalTime="$emit('setTotalTime')" />
+      <timer @setTotalTime="setTotalTime" :isGameOver="isGameOver" />
     </div>
   </div>
 </template>
@@ -25,11 +25,20 @@ export default {
       type: Number,
       require: true,
     },
+    isGameOver: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     Timer,
     Score,
     Button,
+  },
+  methods: {
+    setTotalTime(totalTime) {
+      this.$emit("setTotalTime", totalTime);
+    },
   },
 };
 </script>

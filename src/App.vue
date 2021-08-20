@@ -23,6 +23,9 @@ export default {
   --solitaire-light-blue: rgb(94, 131, 155);
   --solitaire-very-light-blue: #7b9caf;
   --solitaire-light-white: rgba(238, 238, 238, 0.4);
+  --solitaire-pink: #ff4848;
+  --solitaire-purple: #480032;
+  --solitaire-yellow: #fdca40;
 }
 
 @font-face {
@@ -38,7 +41,6 @@ export default {
 
 html {
   background-image: linear-gradient(
-    /* var(--solitaire-red), */
     var(--solitaire-light-white),
     var(--solitaire-very-light-blue),
     var(--solitaire-light-white)
