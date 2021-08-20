@@ -1,9 +1,13 @@
 <template>
   <div class="header-item">
-    <img :src="getIcon(icon)" class="header-item-icon" id="buttonIcon" />
-    <div class="header-item-text button" @click="onClick">
+    <img :src="getIcon(icon)" :class="`header-item-icon ${icon}-icon`" />
+    <button
+      class="header-item-text button"
+      @click="onClick"
+      :id="`${icon}-button`"
+    >
       {{ text }}
-    </div>
+    </button>
   </div>
 </template>
 
@@ -34,9 +38,8 @@ export default {
 <style>
 .button {
   min-width: 5.5vw;
-}
-
-.button:hover {
-  cursor: pointer;
+  color: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
 }
 </style>

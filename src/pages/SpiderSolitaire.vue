@@ -336,10 +336,6 @@ export default {
 
         this.markCards(cardsToMark);
 
-        setTimeout(() => {
-          this.markCards(cardsToMark, true);
-        }, 1000);
-
         this.lastShowedHintIndex++;
         this.calculateScore(scoreRuleEnum.getHint);
       } else {
@@ -348,6 +344,10 @@ export default {
         cardsToMark.push(firstDeck);
         this.markCards(cardsToMark);
       }
+
+      setTimeout(() => {
+        this.markCards(cardsToMark, true);
+      }, 1000);
     },
     markCards(cards, reset = false) {
       cards.forEach((card) => {
@@ -355,10 +355,12 @@ export default {
           card.style.border = "";
           card.style.borderRadius = "";
           card.style.backgroundColor = "";
+          card.classList.remove("marked");
         } else {
           card.style.border = "1vh solid #874444";
           card.style.backgroundColor = "#874444";
           card.style.borderRadius = "1vw";
+          card.classList.add("marked");
         }
       });
     },

@@ -22,9 +22,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.62% </span>
+                <span class="strong">98.63% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>143/145</span>
+                <span class='fraction'>144/146</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.6% </span>
+                <span class="strong">98.61% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>141/143</span>
+                <span class='fraction'>142/144</span>
             </div>
         
             
@@ -504,8 +504,7 @@
 <a name='L446'></a><a href='#L446'>446</a>
 <a name='L447'></a><a href='#L447'>447</a>
 <a name='L448'></a><a href='#L448'>448</a>
-<a name='L449'></a><a href='#L449'>449</a>
-<a name='L450'></a><a href='#L450'>450</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L449'></a><a href='#L449'>449</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -564,7 +563,8 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -861,7 +861,9 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
@@ -950,17 +952,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div&gt;
     &lt;fireworks v-if="isGameOver" /&gt;
     &lt;header-section
       :score="score"
       @getHints="getHints"
-      @openConfirmBox="changeConfirmBoxVisibilty"
+      @openConfirmBox="changeConfirmBoxVisibility"
       @setTotalTime="setTotalTime"
       :isGameOver="isGameOver"
     /&gt;
@@ -998,7 +996,7 @@
     &lt;confirm-box
       :showConfirm="showConfirm"
       @accept="restartGame"
-      @changeConfirmBoxVisibilty="changeConfirmBoxVisibilty"
+      @changeConfirmBoxVisibility="changeConfirmBoxVisibility"
     /&gt;
   &lt;/div&gt;
 &lt;/template&gt;
@@ -1008,12 +1006,13 @@ import HeaderSection from "@/components/HeaderSection.vue";
 import Card from "@/components/Card.vue";
 import CardHolderSection from "@/components/CardHolderSection.vue";
 import CardDealSection from "@/components/CardDealSection.vue";
+import Fireworks from "@/components/Fireworks.vue";
+import ConfirmBox from "@/components/ConfirmBox.vue";
 import { constants } from "@/common/constants/constants";
 import { scoreRuleEnum } from "@/common/enums/scoreRuleEnum";
 import { toastrTypeEnum } from "@/common/enums/toastrTypeEnum";
-import cardFlip from "@/assets/audio/card-flip.mp3";
-import Fireworks from "@/components/Fireworks.vue";
-import ConfirmBox from "@/components/ConfirmBox.vue";
+&nbsp;
+// import cardFlip from "@/assets/audio/card-flip.mp3";
 &nbsp;
 const { totalNumberOfDecks, totalNumberOfCards, scoreRules } = constants;
 &nbsp;
@@ -1053,7 +1052,7 @@ export default {
       movedCardIndex: "",
       refresh: 0,
       numberOfFullCardHolder: 0,
-      cardFlip,
+      // cardFlip,
       totalTime: 0,
       numberOfToDealtDeck: 5,
       totalNumberOfDecks: totalNumberOfDecks,
@@ -1251,7 +1250,7 @@ export default {
     setTotalTime(totalTime) {
       this.totalTime = totalTime;
     },
-<span class="fstat-no" title="function not covered" >    changeConfirmBoxVisibilty() {</span>
+<span class="fstat-no" title="function not covered" >    changeConfirmBoxVisibility() {</span>
 <span class="cstat-no" title="statement not covered" >      this.showConfirm = !this.showConfirm;</span>
     },
     restartGame() {
@@ -1310,10 +1309,12 @@ export default {
           card.style.border = "";
           card.style.borderRadius = "";
           card.style.backgroundColor = "";
+          card.classList.remove("marked");
         } else {
           card.style.border = "1vh solid #874444";
           card.style.backgroundColor = "#874444";
           card.style.borderRadius = "1vw";
+          card.classList.add("marked");
         }
       });
     },
@@ -1398,10 +1399,6 @@ export default {
 .stack {
   margin: 1.5vw 0;
 }
-&nbsp;
-.damla {
-  font-size: 3px !important;
-}
 &lt;/style&gt;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -1410,7 +1407,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Aug 20 2021 08:50:17 GMT+0300 (GMT+03:00)
+                at Fri Aug 20 2021 20:31:09 GMT+0300 (GMT+03:00)
             </div>
         </div>
         <script src="..\..\prettify.js"></script>

@@ -29,7 +29,7 @@ describe("Button.vue", () => {
       },
     });
 
-    const actualIcon = wrapper.findAll("#buttonIcon");
+    const actualIcon = wrapper.findAll(".hint-icon");
 
     expect(actualIcon.exists()).toBeTruthy();
   });

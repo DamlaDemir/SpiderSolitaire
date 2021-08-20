@@ -41,7 +41,7 @@ describe("ConfirmBox.vue", () => {
 
     wrapper.vm.reject();
 
-    expect(wrapper.emitted().changeConfirmBoxVisibilty).toBeTruthy();
+    expect(wrapper.emitted().changeConfirmBoxVisibility).toBeTruthy();
   });
 
   it("should emit accept function", () => {

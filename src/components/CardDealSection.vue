@@ -1,6 +1,10 @@
 <template>
   <div>
-    <empty-card-holder v-if="numberOfToDealtDeck === 0" :ban="true" />
+    <empty-card-holder
+      v-if="numberOfToDealtDeck === 0"
+      :ban="true"
+      class="empty-deck"
+    />
     <div v-else>
       <img
         v-for="index in numberOfToDealtDeck - 1"
