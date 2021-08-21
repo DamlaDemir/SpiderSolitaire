@@ -7,6 +7,7 @@ import Toastr from "@/components/Toastr/Toastr";
 require("./components/Toastr/Toastr.css");
 
 Vue.config.productionTip = false;
+
 Object.defineProperty(Vue.prototype, "$spiderSolitaireService", {
   value: spiderSolitaireService,
 });

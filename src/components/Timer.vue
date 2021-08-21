@@ -31,7 +31,6 @@ export default {
     formattedElapsedTime() {
       const date = new Date(null);
       date.setSeconds(this.elapsedTime / 1000);
-
       const utc = date.toUTCString();
 
       this.$emit("setTotalTime", date.getSeconds());

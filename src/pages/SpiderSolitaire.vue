@@ -58,8 +58,6 @@ import { constants } from "@/common/constants/constants";
 import { scoreRuleEnum } from "@/common/enums/scoreRuleEnum";
 import { toastrTypeEnum } from "@/common/enums/toastrTypeEnum";
 
-// import cardFlip from "@/assets/audio/card-flip.mp3";
-
 const { totalNumberOfDecks, totalNumberOfCards, scoreRules } = constants;
 
 export default {
@@ -98,7 +96,6 @@ export default {
       movedCardIndex: "",
       refresh: 0,
       numberOfFullCardHolder: 0,
-      // cardFlip,
       totalTime: 0,
       numberOfToDealtDeck: 5,
       totalNumberOfDecks: totalNumberOfDecks,
@@ -136,9 +133,6 @@ export default {
     },
     dragStart(event, card, cardStack, stackIndex, cardIndex) {
       const target = event.target;
-
-      // this.playSound();
-
       let isDraggable = this.$spiderSolitaireService.isDraggable(
         cardStack,
         cardIndex
@@ -261,7 +255,7 @@ export default {
       this.stacks[stackIndex].splice(cardIndex);
     },
     addCardsToStack(stackIndex, cards) {
-      this.stacks[stackIndex] = [...this.stacks[stackIndex], ...cards]; // kaydırıldığı yeni stack'e atılır.
+      this.stacks[stackIndex] = [...this.stacks[stackIndex], ...cards];
     },
     fillCardHolder() {
       this.numberOfFullCardHolder++;
@@ -277,11 +271,6 @@ export default {
     gameOver() {
       this.isGameOver = true;
     },
-    // playSound() {
-    //   var audio = new Audio(this.cardFlip);
-    //   audio.play();
-    // },
-
     calculateScore(currentRule) {
       if (this.isGameOver) {
         this.score = this.score / 4 + (600 - this.totalTime) * 25;

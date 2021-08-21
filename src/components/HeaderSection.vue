@@ -1,10 +1,13 @@
 <template>
   <div class="header-section">
     <div class="header-item-section">
-      <Button icon="restart" text="RESTART" @onClick="$emit('openConfirmBox')" />
+      <Button
+        icon="restart"
+        text="RESTART"
+        @onClick="$emit('openConfirmBox')"
+      />
       <Button icon="hint" text="HINT" @onClick="$emit('getHints')" />
     </div>
-
     <div class="header-text">ONE SUIT SOLITAIRE</div>
     <div class="header-item-section">
       <score :score="score" />
