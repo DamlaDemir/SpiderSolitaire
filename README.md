@@ -80,6 +80,9 @@ npm run serve
 ```
 npm run test:unit
 ```
+```
+npx jest --coverage
+```
 
 ## Run your end-to-end tests
 ```
