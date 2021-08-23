@@ -119,12 +119,12 @@ const spiderSolitaireService = {
       let count = 1;
 
       for (let cardIndex = stack.length - 1; cardIndex > 0; cardIndex--) {
+        let prevCard = stack[cardIndex - 1],
+          currentCard = stack[cardIndex];
+
         if (
-          stack[cardIndex - 1].isOpen &&
-          utils.isSequential([
-            stack[cardIndex - 1].number,
-            stack[cardIndex].number,
-          ])
+          prevCard.isOpen &&
+          utils.isSequential([prevCard.number, currentCard.number])
         ) {
           count++;
         } else {

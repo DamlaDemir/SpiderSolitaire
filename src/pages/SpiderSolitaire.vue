@@ -132,12 +132,14 @@ export default {
       this.dealtCards = this.$spiderSolitaireService.getDealtCards(this.cards);
     },
     dragStart(event, card, cardStack, stackIndex, cardIndex) {
+      //It works as soon as the card starts to drag.
       const target = event.target;
       let isDraggable = this.$spiderSolitaireService.isDraggable(
         cardStack,
         cardIndex
       );
 
+      //The cards under the dragged cards are checked to see if they are in order.
       if (isDraggable) {
         this.movedCard = card;
         this.movedCardStack = cardStack;
@@ -157,10 +159,12 @@ export default {
       }
     },
     dragEnd(event) {
+      //It works as soon as the drag is finished.
       const card_id = event.target.id;
       const cardElement = document.getElementById(card_id);
       let isMovable = this.isMovable();
 
+      //Checks whether the card in the target and the dragged cards are in order.
       if (isMovable) {
         const movedCards = this.movedCardStack.slice(this.movedCardIndex);
 
@@ -183,6 +187,7 @@ export default {
       }
     },
     dragEnter(card, stack, cardIndex, stackIndex) {
+      //It works when hovering over the target card.
       let isLastCard = cardIndex == stack.length - 1;
 
       if (isLastCard) {
@@ -303,6 +308,7 @@ export default {
       }
 
       if (this.hints.length > 0) {
+        //If all hints are shown, it will start from the beginning.
         if (this.lastShowedHintIndex >= this.hints.length) {
           this.lastShowedHintIndex = 0;
         }
@@ -338,21 +344,6 @@ export default {
         this.markCards(cardsToMark, true);
       }, 1000);
     },
-    markCards(cards, reset = false) {
-      cards.forEach((card) => {
-        if (reset) {
-          card.style.border = "";
-          card.style.borderRadius = "";
-          card.style.backgroundColor = "";
-          card.classList.remove("marked");
-        } else {
-          card.style.border = "1vh solid #874444";
-          card.style.backgroundColor = "#874444";
-          card.style.borderRadius = "1vw";
-          card.classList.add("marked");
-        }
-      });
-    },
     calculateHints() {
       let hints = [];
 
@@ -365,24 +356,22 @@ export default {
           currentCardIndex >= 0;
           currentCardIndex--
         ) {
-          let isLastCard = currentCardIndex === currentStack.length - 1,
+          let currentCard = currentStack[currentCardIndex],
+            nextCard = currentStack[currentCardIndex + 1],
+            isLastCard = currentCardIndex === currentStack.length - 1,
             IsSequentialCurrentAndNextCard = isLastCard
               ? true
-              : this.$utils.isSequential([
-                  currentStack[currentCardIndex].number,
-                  currentStack[currentCardIndex + 1].number,
-                ]),
-            currentCardInCurrentStack = currentStack[currentCardIndex];
+              : this.$utils.isSequential([currentCard.number, nextCard.number]);
 
-          if (
-            currentCardInCurrentStack.isOpen &&
-            IsSequentialCurrentAndNextCard
-          ) {
+          if (currentCard.isOpen && IsSequentialCurrentAndNextCard) {
+            //All stacks are checked and combinations are found for the current card.
             this.stacks.forEach((targetStack, targetStackIndex) => {
+              let targetCard = targetStack[targetStack.length - 1];
+
               if (
                 this.$utils.isSequential([
-                  targetStack[targetStack.length - 1].number,
-                  currentStack[currentCardIndex].number,
+                  targetCard.number,
+                  currentCard.number,
                 ]) &&
                 targetStackIndex != currentStackIndex
               ) {
@@ -397,16 +386,18 @@ export default {
                     targetStack
                   );
 
+                //if the number of sequential cards in the target is less, it will not be shown as a hint.
                 if (
                   sequentialCardCountInTargetStack >=
                   sequentialCardCountInCurrentStack
                 ) {
                   let currentCardIndexes = [];
 
+                  //current card and its bottom cards
                   currentCardIndexes = Array.from(
                     { length: currentStack.length - currentCardIndex },
                     (_, i) => i + currentCardIndex
-                  ); //current card and its bottom cards
+                  );
 
                   let hint = {
                     currentStackIndex: currentStackIndex,
@@ -426,6 +417,21 @@ export default {
       });
 
       this.hints = hints;
+    },
+    markCards(cards, reset = false) {
+      cards.forEach((card) => {
+        if (reset) {
+          card.style.border = "";
+          card.style.borderRadius = "";
+          card.style.backgroundColor = "";
+          card.classList.remove("marked");
+        } else {
+          card.style.border = "1vh solid #874444";
+          card.style.backgroundColor = "#874444";
+          card.style.borderRadius = "1vw";
+          card.classList.add("marked");
+        }
+      });
     },
   },
   mounted() {
