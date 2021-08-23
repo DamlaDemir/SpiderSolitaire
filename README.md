@@ -2,7 +2,11 @@
 Trendyol Frontend Bootcamp Graduation Project
 
 ### Demo: https://vue-spider-solitaire.herokuapp.com/
-### Technologies: Vue.js
+### Technologies: 
+* Vue.js
+* Cypress
+* Jest
+* Heroku
 
 ## Game Description
 A game of cards in which all the cards on the table must be in order A, 2, 3, 4, 5, 6, 7, 8 ,9 , 10, J, Q, K.
@@ -17,8 +21,16 @@ A game of cards in which all the cards on the table must be in order A, 2, 3, 4,
 * The game must be won when 8 ranked sets have been completed.
 * A warning message should be given when unordered cards are wanted to be dragged.
 * When the card is distributed, if there is an empty card space, a warning should be given and the card should not be distributed.
-* Score must be calculated.150 points should be added for each card opened, and 1040 points for each series completion.Each time a hint is taken, it should be reduced by 20 points.After the game is over, it should calculate according to the elapsed time.
+* Score must be calculated.
 
+### Score Calculating
+* 150 points should be added for each card opened.
+* 1040 points should be added for each series completion.
+* Each time a hint is taken, it should be reduced by 20 points.
+* After the game is over, it should calculate according to the elapsed time. 
+ ```
+ ( totalScore / 4 + (600 - totalTime) * 25)
+```
 
 ## Assignment
 * Writing the code of the game according to the rules above.
@@ -26,7 +38,7 @@ A game of cards in which all the cards on the table must be in order A, 2, 3, 4,
 * Writing e2e tests with Cypress.
 * Game design should be responsive.
 * Component based architectural, clean code, styling, error handling,ui/ux,ci/cd.
-* Score must be at least 60 in Lighthouse tests.
+* Score must be at least 60 in Lighthouse tests. 
 
 ## Game Preview
 
