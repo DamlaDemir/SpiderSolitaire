@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <spider-solitaire />
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
 <script>
-import SpiderSolitaire from "@/pages/SpiderSolitaire.vue";
-
 export default {
   name: "App",
-  components: {
-    SpiderSolitaire,
-  },
 };
 </script>
 
@@ -48,5 +43,9 @@ html {
   background-attachment: fixed;
   overflow-x: hidden;
   letter-spacing: 0.1vw;
+}
+
+ul {
+  padding: 0;
 }
 </style>

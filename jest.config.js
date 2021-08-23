@@ -7,6 +7,7 @@ module.exports = {
   collectCoverageFrom: [
     "src/**/*.{js,vue}",
     "!src/main.js", // No need to cover bootstrap file
+    "!src/App.vue", // No need to cover bootstrap file
     "!src/components/Fireworks.vue", // No need to cover bootstrap file
   ],
 };

@@ -819,7 +819,7 @@ describe("spiderSolitaire.vue", () => {
         ],
       ];
       const targetStackIndex = 0;
-      const expectedScore = 1690;
+      const expectedScore = 1190;
 
       const wrapper = shallowMount(spiderSolitaire);
 
@@ -1299,7 +1299,7 @@ describe("spiderSolitaire.vue", () => {
   describe("calculateScore function", () => {
     it("should be added 1040 points to score when each time a hand is completed", () => {
       const rule = scoreRuleEnum.completeHand;
-      const expectedScore = 1540;
+      const expectedScore = 1040;
 
       const wrapper = shallowMount(spiderSolitaire);
 
@@ -1312,7 +1312,7 @@ describe("spiderSolitaire.vue", () => {
 
     it("should be added 150 points when every closed card is opened", () => {
       const rule = scoreRuleEnum.openCard;
-      const expectedScore = 650;
+      const expectedScore = 150;
 
       const wrapper = shallowMount(spiderSolitaire);
 
@@ -1326,7 +1326,7 @@ describe("spiderSolitaire.vue", () => {
     it("should be calculated total score when game is over", async () => {
       const rule = scoreRuleEnum.completeHand;
       const totalTimeSecond = 3;
-      const expectedScore = 15310;
+      const expectedScore = 15185;
 
       const wrapper = await shallowMount(spiderSolitaire);
 

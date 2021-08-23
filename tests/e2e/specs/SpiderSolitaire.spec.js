@@ -1,6 +1,6 @@
 describe("SpiderSolitaire", () => {
   before(() => {
-    cy.visit("http://localhost:8080/");
+    cy.visit("http://localhost:8080/spiderSolitaire");
   });
   it("visits the app root url", () => {
     cy.get(".header-text").should("be.exist");

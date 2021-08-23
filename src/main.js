@@ -3,6 +3,7 @@ import App from "./App.vue";
 import spiderSolitaireService from "@/services/spiderSolitaireService";
 import utils from "@/common/helpers/utils";
 import Toastr from "@/components/Toastr/Toastr";
+import router from "./router";
 
 require("./components/Toastr/Toastr.css");
 
@@ -15,5 +16,6 @@ Object.defineProperty(Vue.prototype, "$utils", { value: utils });
 Object.defineProperty(Vue.prototype, "$toastr", { value: Toastr });
 
 new Vue({
+  router,
   render: (h) => h(App),
 }).$mount("#app");

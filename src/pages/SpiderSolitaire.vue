@@ -99,7 +99,7 @@ export default {
       totalTime: 0,
       numberOfToDealtDeck: 5,
       totalNumberOfDecks: totalNumberOfDecks,
-      score: 500,
+      score: 0,
       isGameOver: false,
       hints: [],
       lastShowedHintIndex: 0,
