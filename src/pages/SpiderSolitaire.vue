@@ -357,6 +357,9 @@ export default {
       let hints = [];
 
       this.stacks.forEach((currentStack, currentStackIndex) => {
+        let sequentialCardCountInCurrentStack = 0,
+          sequentialCardCountInTargetStack = 0;
+
         for (
           let currentCardIndex = currentStack.length - 1;
           currentCardIndex >= 0;
@@ -383,21 +386,37 @@ export default {
                 ]) &&
                 targetStackIndex != currentStackIndex
               ) {
-                let currentCardIndexes = [];
+                let prevCards = currentStack.slice(0, currentCardIndex);
+                sequentialCardCountInCurrentStack =
+                  this.$spiderSolitaireService.getCountOfSequentialCards(
+                    prevCards
+                  );
 
-                currentCardIndexes = Array.from(
-                  { length: currentStack.length - currentCardIndex },
-                  (_, i) => i + currentCardIndex
-                );
+                sequentialCardCountInTargetStack =
+                  this.$spiderSolitaireService.getCountOfSequentialCards(
+                    targetStack
+                  );
 
-                let hint = {
-                  currentStackIndex: currentStackIndex,
-                  currentCardIndexes: currentCardIndexes,
-                  targetStackIndex: targetStackIndex,
-                  targetCardIndex: this.stacks[targetStackIndex].length - 1,
-                };
+                if (
+                  sequentialCardCountInTargetStack >=
+                  sequentialCardCountInCurrentStack
+                ) {
+                  let currentCardIndexes = [];
 
-                hints.push(hint);
+                  currentCardIndexes = Array.from(
+                    { length: currentStack.length - currentCardIndex },
+                    (_, i) => i + currentCardIndex
+                  ); //current card and its bottom cards
+
+                  let hint = {
+                    currentStackIndex: currentStackIndex,
+                    currentCardIndexes: currentCardIndexes,
+                    targetStackIndex: targetStackIndex,
+                    targetCardIndex: this.stacks[targetStackIndex].length - 1,
+                  };
+
+                  hints.push(hint);
+                }
               }
             });
           } else {

@@ -114,6 +114,33 @@ const spiderSolitaireService = {
       throw errorMsg;
     }
   },
+  getCountOfSequentialCards(stack) {
+    try {
+      let count = 1;
+
+      for (let cardIndex = stack.length - 1; cardIndex > 0; cardIndex--) {
+        if (
+          stack[cardIndex - 1].isOpen &&
+          utils.isSequential([
+            stack[cardIndex - 1].number,
+            stack[cardIndex].number,
+          ])
+        ) {
+          count++;
+        } else {
+          break;
+        }
+      }
+
+      return count;
+    } catch (err) {
+      let errorMsg = `Error ! Msg: ${err.message}`;
+
+      console.log(errorMsg);
+
+      throw errorMsg;
+    }
+  },
 };
 
 export default spiderSolitaireService;

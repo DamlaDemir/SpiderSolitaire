@@ -264,6 +264,45 @@ describe("spiderSolitaireService.js", () => {
       expect(mockLog).toBeCalledWith(expectedError);
     });
   });
+
+  describe("getCountOfSequentialCards function", () => {
+    it("should return the number of sequential cards in the given array", () => {
+      const expectedSequentialCardCount = 2;
+      const stack = [
+        {
+          number: -1,
+          isOpen: false,
+          isDraggable: false,
+        },
+        {
+          number: 5,
+          isOpen: true,
+          isDraggable: false,
+        },
+        {
+          number: 6,
+          isOpen: true,
+          isDraggable: false,
+        },
+      ];
+
+      let actualResult =
+        spiderSolitaireService.getCountOfSequentialCards(stack);
+
+      expect(actualResult).toBe(expectedSequentialCardCount);
+    });
+    it("should throw error when stack is undefined", () => {
+      const stack = undefined;
+      const expectedError =
+        "Error ! Msg: Cannot read property 'length' of undefined";
+
+      let actualResult = () =>
+        spiderSolitaireService.getCountOfSequentialCards(stack);
+
+      expect(actualResult).toThrowError(expectedError);
+      expect(mockLog).toBeCalledWith(expectedError);
+    });
+  });
 });
 
 const createTestCards = () => {

@@ -22,16 +22,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.63% </span>
+                <span class="strong">98.68% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>144/146</span>
+                <span class='fraction'>150/152</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92% </span>
+                <span class="strong">90.38% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>46/50</span>
+                <span class='fraction'>47/52</span>
             </div>
         
             
@@ -43,9 +43,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.61% </span>
+                <span class="strong">98.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>142/144</span>
+                <span class='fraction'>148/150</span>
             </div>
         
             
@@ -493,7 +493,27 @@
 <a name='L435'></a><a href='#L435'>435</a>
 <a name='L436'></a><a href='#L436'>436</a>
 <a name='L437'></a><a href='#L437'>437</a>
-<a name='L438'></a><a href='#L438'>438</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L438'></a><a href='#L438'>438</a>
+<a name='L439'></a><a href='#L439'>439</a>
+<a name='L440'></a><a href='#L440'>440</a>
+<a name='L441'></a><a href='#L441'>441</a>
+<a name='L442'></a><a href='#L442'>442</a>
+<a name='L443'></a><a href='#L443'>443</a>
+<a name='L444'></a><a href='#L444'>444</a>
+<a name='L445'></a><a href='#L445'>445</a>
+<a name='L446'></a><a href='#L446'>446</a>
+<a name='L447'></a><a href='#L447'>447</a>
+<a name='L448'></a><a href='#L448'>448</a>
+<a name='L449'></a><a href='#L449'>449</a>
+<a name='L450'></a><a href='#L450'>450</a>
+<a name='L451'></a><a href='#L451'>451</a>
+<a name='L452'></a><a href='#L452'>452</a>
+<a name='L453'></a><a href='#L453'>453</a>
+<a name='L454'></a><a href='#L454'>454</a>
+<a name='L455'></a><a href='#L455'>455</a>
+<a name='L456'></a><a href='#L456'>456</a>
+<a name='L457'></a><a href='#L457'>457</a>
+<a name='L458'></a><a href='#L458'>458</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -853,6 +873,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -880,6 +905,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -893,6 +932,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1289,6 +1329,11 @@ export default {
       let hints = [];
 &nbsp;
       this.stacks.forEach((currentStack, currentStackIndex) =&gt; {
+        let sequentialCardCountInCurrentStack = 0;
+        let sequentialCardCountInTargetStack = 0;
+&nbsp;
+        console.log(sequentialCardCountInCurrentStack);
+&nbsp;
         for (
           let currentCardIndex = currentStack.length - 1;
           currentCardIndex &gt;= 0;
@@ -1315,21 +1360,36 @@ export default {
                 ]) &amp;&amp;
                 targetStackIndex != currentStackIndex
               ) {
-                let currentCardIndexes = [];
+                sequentialCardCountInCurrentStack =
+                  this.$spiderSolitaireService.getCountOfSequentialCards(
+                    currentStack.slice(0, currentCardIndex)
+                  );
 &nbsp;
-                currentCardIndexes = Array.from(
-                  { length: currentStack.length - currentCardIndex },
-                  (_, i) =&gt; i + currentCardIndex
-                );
+                sequentialCardCountInTargetStack =
+                  this.$spiderSolitaireService.getCountOfSequentialCards(
+                    targetStack
+                  );
 &nbsp;
-                let hint = {
-                  currentStackIndex: currentStackIndex,
-                  currentCardIndexes: currentCardIndexes,
-                  targetStackIndex: targetStackIndex,
-                  targetCardIndex: this.stacks[targetStackIndex].length - 1,
-                };
+<span class="missing-if-branch" title="else path not taken" >E</span>                if (
+                  sequentialCardCountInTargetStack &gt;=
+                  sequentialCardCountInCurrentStack
+                ) {
+                  let currentCardIndexes = [];
 &nbsp;
-                hints.push(hint);
+                  currentCardIndexes = Array.from(
+                    { length: currentStack.length - currentCardIndex },
+                    (_, i) =&gt; i + currentCardIndex
+                  ); //current card and its bottom cards
+&nbsp;
+                  let hint = {
+                    currentStackIndex: currentStackIndex,
+                    currentCardIndexes: currentCardIndexes,
+                    targetStackIndex: targetStackIndex,
+                    targetCardIndex: this.stacks[targetStackIndex].length - 1,
+                  };
+&nbsp;
+                  hints.push(hint);
+                }
               }
             });
           } else {
@@ -1374,7 +1434,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Aug 21 2021 17:55:37 GMT+0300 (GMT+03:00)
+                at Sun Aug 22 2021 13:38:18 GMT+0300 (GMT+03:00)
             </div>
         </div>
         <script src="..\..\prettify.js"></script>

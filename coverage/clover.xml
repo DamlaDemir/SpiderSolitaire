@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1629557737173" clover="3.2.0">
-  <project timestamp="1629557737174" name="All files">
-    <metrics statements="257" coveredstatements="255" conditionals="58" coveredconditionals="53" methods="75" coveredmethods="73" elements="390" coveredelements="381" complexity="0" loc="257" ncloc="257" packages="8" files="15" classes="15"/>
+<coverage generated="1629628698995" clover="3.2.0">
+  <project timestamp="1629628698996" name="All files">
+    <metrics statements="273" coveredstatements="271" conditionals="64" coveredconditionals="58" methods="76" coveredmethods="74" elements="413" coveredelements="403" complexity="0" loc="273" ncloc="273" packages="8" files="15" classes="15"/>
     <package name="src">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="App.vue" path="C:\Gitlab\SpiderSolitaire\src\App.vue">
@@ -40,11 +40,11 @@
         <line num="12" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="20" count="65" type="stmt"/>
-        <line num="21" count="65" type="stmt"/>
-        <line num="22" count="113" type="stmt"/>
-        <line num="24" count="110" type="stmt"/>
-        <line num="26" count="64" type="stmt"/>
+        <line num="20" count="69" type="stmt"/>
+        <line num="21" count="69" type="stmt"/>
+        <line num="22" count="117" type="stmt"/>
+        <line num="24" count="114" type="stmt"/>
+        <line num="26" count="68" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
@@ -124,9 +124,9 @@
       </file>
     </package>
     <package name="src.pages">
-      <metrics statements="144" coveredstatements="142" conditionals="50" coveredconditionals="46" methods="37" coveredmethods="35"/>
+      <metrics statements="150" coveredstatements="148" conditionals="52" coveredconditionals="47" methods="37" coveredmethods="35"/>
       <file name="SpiderSolitaire.vue" path="C:\Gitlab\SpiderSolitaire\src\pages\SpiderSolitaire.vue">
-        <metrics statements="144" coveredstatements="142" conditionals="50" coveredconditionals="46" methods="37" coveredmethods="35"/>
+        <metrics statements="150" coveredstatements="148" conditionals="52" coveredconditionals="47" methods="37" coveredmethods="35"/>
         <line num="51" count="2" type="stmt"/>
         <line num="52" count="2" type="stmt"/>
         <line num="53" count="2" type="stmt"/>
@@ -259,24 +259,30 @@
         <line num="357" count="4" type="stmt"/>
         <line num="359" count="4" type="stmt"/>
         <line num="360" count="11" type="stmt"/>
-        <line num="365" count="75" type="cond" truecount="2" falsecount="0"/>
-        <line num="374" count="25" type="cond" truecount="4" falsecount="0"/>
-        <line num="378" count="14" type="stmt"/>
-        <line num="379" count="40" type="cond" truecount="4" falsecount="0"/>
-        <line num="386" count="6" type="stmt"/>
-        <line num="388" count="6" type="stmt"/>
-        <line num="389" count="9" type="stmt"/>
-        <line num="393" count="6" type="stmt"/>
-        <line num="400" count="6" type="stmt"/>
-        <line num="404" count="11" type="stmt"/>
-        <line num="409" count="4" type="stmt"/>
-        <line num="413" count="35" type="stmt"/>
+        <line num="361" count="11" type="stmt"/>
+        <line num="363" count="11" type="stmt"/>
+        <line num="365" count="11" type="stmt"/>
+        <line num="370" count="75" type="cond" truecount="2" falsecount="0"/>
+        <line num="379" count="25" type="cond" truecount="4" falsecount="0"/>
+        <line num="383" count="14" type="stmt"/>
+        <line num="384" count="40" type="cond" truecount="4" falsecount="0"/>
+        <line num="391" count="6" type="stmt"/>
+        <line num="396" count="6" type="stmt"/>
+        <line num="401" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="405" count="6" type="stmt"/>
+        <line num="407" count="6" type="stmt"/>
+        <line num="408" count="9" type="stmt"/>
+        <line num="412" count="6" type="stmt"/>
+        <line num="419" count="6" type="stmt"/>
+        <line num="424" count="11" type="stmt"/>
+        <line num="429" count="4" type="stmt"/>
+        <line num="433" count="35" type="stmt"/>
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="49" coveredstatements="49" conditionals="2" coveredconditionals="2" methods="10" coveredmethods="10"/>
+      <metrics statements="59" coveredstatements="59" conditionals="6" coveredconditionals="6" methods="11" coveredmethods="11"/>
       <file name="spiderSolitaireService.js" path="C:\Gitlab\SpiderSolitaire\src\services\spiderSolitaireService.js">
-        <metrics statements="49" coveredstatements="49" conditionals="2" coveredconditionals="2" methods="10" coveredmethods="10"/>
+        <metrics statements="59" coveredstatements="59" conditionals="6" coveredconditionals="6" methods="11" coveredmethods="11"/>
         <line num="11" count="2" type="stmt"/>
         <line num="13" count="2" type="stmt"/>
         <line num="15" count="37" type="stmt"/>
@@ -326,6 +332,16 @@
         <line num="110" count="1" type="stmt"/>
         <line num="112" count="1" type="stmt"/>
         <line num="114" count="1" type="stmt"/>
+        <line num="118" count="14" type="stmt"/>
+        <line num="119" count="14" type="stmt"/>
+        <line num="121" count="14" type="stmt"/>
+        <line num="122" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="129" count="4" type="stmt"/>
+        <line num="131" count="10" type="stmt"/>
+        <line num="135" count="13" type="stmt"/>
+        <line num="137" count="1" type="stmt"/>
+        <line num="139" count="1" type="stmt"/>
+        <line num="141" count="1" type="stmt"/>
       </file>
     </package>
   </project>
