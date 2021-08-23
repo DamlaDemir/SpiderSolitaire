@@ -1,7 +1,8 @@
 # REVERSED SPIDER SOLITAIRE
 Trendyol Frontend Bootcamp Graduation Project
 
-### Heroku url: https://vue-spider-solitaire.herokuapp.com/
+### Demo: https://vue-spider-solitaire.herokuapp.com/
+### Technologies: Vue.js
 
 ## Game Description
 A game of cards in which all the cards on the table must be in order A, 2, 3, 4, 5, 6, 7, 8 ,9 , 10, J, Q, K.
@@ -16,6 +17,7 @@ A game of cards in which all the cards on the table must be in order A, 2, 3, 4,
 * The game must be won when 8 ranked sets have been completed.
 * A warning message should be given when unordered cards are wanted to be dragged.
 * When the card is distributed, if there is an empty card space, a warning should be given and the card should not be distributed.
+* Score must be calculated.150 points should be added for each card opened, and 1040 points for each series completion.Each time a hint is taken, it should be reduced by 20 points.After the game is over, it should calculate according to the elapsed time.
 
 
 ## Assignment
