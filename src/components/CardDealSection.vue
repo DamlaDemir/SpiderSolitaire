@@ -14,9 +14,9 @@
         class="deck"
       />
       <img
-        src="../../src/assets/images/cards/close-card.svg"
+        src="../../src/assets/images/cards/close-card2.jpg"
         @click="dealCards"
-        class="deck"
+        class="deck deck-first"
         id="deck-first"
       />
     </div>

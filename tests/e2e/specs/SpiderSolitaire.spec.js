@@ -60,7 +60,7 @@ describe("SpiderSolitaire", () => {
     cy.get(".score").should("be.exist");
     const icon = cy.get(".score").prev();
     icon.should("have.attr", "src").should("include", "score");
-    cy.contains(".score", "460");
+    cy.contains(".score", "-40");
   });
 
   it("should be timer on the page", () => {
