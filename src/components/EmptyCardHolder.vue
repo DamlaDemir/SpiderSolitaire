@@ -22,20 +22,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .card-holder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 6.7vw;
-  height: 9.2vw;
+  @include flexCenter;
+  @include widthHeightSize();
   border-radius: 0.5vw;
-  border: 0.5vh solid var(--solitaire-very-light-blue);
-  background-color: var(--solitaire-light-white);
+  border: 0.5vh solid $solitaire-very-light-blue;
+  background-color: $solitaire-light-white;
   background-image: linear-gradient(
-    var(--solitaire-very-light-blue),
-    var(--solitaire-light-white),
-    var(--solitaire-light-white)
+    $solitaire-very-light-blue,
+    $solitaire-light-white,
+    $solitaire-light-white
   );
 }
 

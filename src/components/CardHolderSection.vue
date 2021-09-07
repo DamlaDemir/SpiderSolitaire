@@ -65,7 +65,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .card-holder-wrapper {
   display: flex;
   flex-direction: row-reverse;
@@ -74,7 +74,6 @@ export default {
 }
 
 .full-card-holder {
-  width: 6.7vw;
-  height: 9.2vw;
+  @include widthHeightSize();
 }
 </style>

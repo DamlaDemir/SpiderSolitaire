@@ -38,24 +38,22 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .confirmbox {
   display: flex;
   flex-flow: column wrap;
-  position: fixed;
-  top: 35%;
-  left: 35%;
+  @include position(fixed, 35%, 35%);
   font-size: 1vw;
-  background-color: white;
+  background-color: $white;
   border-radius: 0.8vw;
   text-align: center;
   min-width: 25vw;
   width: auto;
-  transition: all 0.1s ease-in;
-  border: 0.1vh solid #ccc;
+  @include transition(0.1, ease-in);
+  border: 0.1vh solid $light-gray;
 }
 .cofirm-text {
-  border-bottom: 0.1vh solid #ccc;
+  border-bottom: 0.1vh solid $light-gray;
   padding: 1vw;
 }
 
@@ -66,7 +64,7 @@ export default {
 .confirm-button {
   min-width: 50%;
   padding: 0.8vw;
-  background-color: white;
+  background-color: $white;
   font-size: 1.5vw;
   border: initial;
 }
@@ -81,7 +79,7 @@ export default {
 
 .yes {
   border-bottom-left-radius: 0.8vw;
-  border-right: 0.1vh solid #ccc;
+  border-right: 0.1vh solid $light-gray;
 }
 
 .close-button {
@@ -90,7 +88,7 @@ export default {
 }
 
 .close-button button {
-  background-color: white;
+  background-color: $white;
   border: none;
   font-size: 1vw;
   border-radius: 0.8vw;

@@ -1,0 +1,27 @@
+@import "./variables.scss";
+
+@font-face {
+  font-family: "LilitaOne-Regular";
+  src: url("../assets/fonts/LilitaOne-Regular.ttf");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "LilitaOne-Regular", Helvetica, Arial, Sans-Serif;
+}
+
+html {
+  background-image: linear-gradient(
+    $solitaire-light-white,
+    $solitaire-very-light-blue,
+    $solitaire-light-white
+  );
+  background-attachment: fixed;
+  overflow-x: hidden;
+  letter-spacing: 0.1vw;
+}
+
+ul {
+  padding: 0;
+}

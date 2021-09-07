@@ -46,16 +46,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .header-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--solitaire-dark-blue);
+  background-color: $solitaire-dark-blue;
   color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
+  @include position(fixed, 0, 0);
   width: 100vw;
   padding: 0.2vw 1vw;
   font-size: 1.5vw;
@@ -71,22 +69,19 @@ export default {
 }
 
 .header-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexCenter;
   gap: 0.2vw;
 }
 
 .header-item-text {
-  background-color: var(--solitaire-very-light-blue);
-  border: 0.2vw solid var(--solitaire-blue);
+  background-color: $solitaire-very-light-blue;
+  border: 0.2vw solid $solitaire-blue;
   border-radius: 0.5vw;
   padding: 0.1vw;
   text-align: center;
 }
 
 .header-item-icon {
-  width: 2vw;
-  height: 2vw;
+  @include widthHeightSize(2vw, 2vw);
 }
 </style>

@@ -1,0 +1,33 @@
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin transition($duration, $type: linear) {
+  transition: all $duration $type;
+}
+
+@mixin widthHeightSize($width: 6.7vw, $height: 9.2vw) {
+  width: $width;
+  height: $height;
+}
+
+@mixin position($type, $top, $left) {
+  position: $type;
+  top: $top;
+  left: $left;
+}
+
+@mixin animation(
+  $name,
+  $duration,
+  $delay,
+  $timingFunction: both,
+  $iterationCount: infinite
+) {
+  -webkit-animation: $name $duration both $iterationCount;
+  animation: $name $duration both $iterationCount;
+  -webkit-animation-delay: $delay;
+  animation-delay: $delay;
+}

@@ -76,18 +76,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .card {
-  width: 6.7vw;
-  height: 9.2vw;
+  @include widthHeightSize();
   border-radius: 0.5vw;
   margin-bottom: -7.2vw;
-  transition: all 0.2s linear;
+  @include transition(3s);
 }
 
 .open-card:hover {
-  background-color: var(--solitaire-red);
-  border: 0.5vh solid var(--solitaire-red);
+  background-color: $solitaire-red;
+  border: 0.5vh solid $solitaire-red;
   border-radius: 1vw;
 }
 

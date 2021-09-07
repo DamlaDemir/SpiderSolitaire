@@ -7,18 +7,18 @@
     />
     <div v-else>
       <img
-        v-for="index in numberOfToDealtDeck - 1"
+        v-for="index in numberOfToDealtDeck"
         :key="index"
         src="../../src/assets/images/cards/close-card.svg"
         @click="dealCards"
         class="deck"
       />
-      <img
+      <!-- <img
         src="../../src/assets/images/cards/close-card2.jpg"
         @click="dealCards"
         class="deck deck-first"
         id="deck-first"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -46,18 +46,16 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .deck {
-  width: 6.7vw;
-  height: 9.2vw;
+  @include widthHeightSize();
   border-radius: 1vw;
   margin-right: -4vw;
 }
 
-.deck-first {
-  border: 0.3vw solid #fff;
-  width: 6.7vw;
-  height: 8.8vw;
-  margin: 0.2vw;
-}
+// .deck-first {
+//   @include widthHeightSize(6.7vw, 8.8vw);
+//   border: 0.3vw solid #fff;
+//   margin: 0.2vw;
+// }
 </style>

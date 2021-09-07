@@ -37,47 +37,44 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .modal {
-  display: flex;
+  @include flexCenter;
   flex-flow: column wrap;
-  align-items: center;
-  position: fixed;
-  top: 10%;
-  left: 28%;
-  background-color: rgba(238, 238, 238, 0.8);
-  color: var(--solitaire-blue);
-  border: 0.6vw solid var(--solitaire-dark-blue);
+  @include position(fixed, 10%, 28%);
+  background-color: $solitaire-blur-gray;
+  color: $solitaire-blue;
+  border: 0.6vw solid $solitaire-dark-blue;
   border-radius: 4vw;
   font-size: 1vw;
   min-width: 45vw;
-}
 
-.modal h1 {
-  font-size: 1.7vw;
-  color: var(--solitaire-red);
-  margin-bottom: 1vw;
+  h1 {
+    font-size: 1.7vw;
+    color: $solitaire-red;
+    margin-bottom: 1vw;
+  }
 }
 
 .lets-start {
-  background-color: var(--solitaire-red);
+  background-color: $solitaire-red;
   color: white;
   border-radius: 0.5vw;
   margin: 2vw;
   padding: 1vw;
   font-size: 1.5vw;
   border: none;
-}
 
-.lets-start:hover {
-  background-color: var(--solitaire-dark-blue);
+  &:hover {
+    background-color: $solitaire-dark-blue;
+  }
 }
 
 .game-rules {
   list-style-image: url("../assets/images/cards/close-card.svg");
-}
 
-.game-rules li {
-  margin: 0.5vw;
+  li {
+    margin: 0.5vw;
+  }
 }
 </style>
